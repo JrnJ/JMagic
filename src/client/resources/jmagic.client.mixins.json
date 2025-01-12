@@ -1,0 +1,12 @@
+{
+  "required": true,
+  "package": "com.jeroenj.mixin.client",
+  "compatibilityLevel": "JAVA_21",
+  "client": [
+    "ExampleClientMixin",
+    "InGameHudMixin"
+  ],
+  "injectors": {
+    "defaultRequire": 1
+	}
+}

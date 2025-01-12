@@ -1,0 +1,15 @@
+{
+  "item.jmagic.magic_wand": "Magic Wand",
+  "item.jmagic.mage_hood": "Mage Hood",
+  "item.jmagic.mage_robe": "Mage Robe",
+  "item.jmagic.mage_leggings": "Mage Leggings",
+  "item.jmagic.mage_boots": "Mage Boots",
+
+  "block.jmagic.mage_table": "Mage Table",
+
+  "itemGroup.jmagic.jmagic_group": "JMagic",
+
+  "key.jmagic.select_ability": "Select Ability",
+
+  "category.jmagic.jmagic": "JMagic"
+}
