@@ -10,11 +10,21 @@ import com.jeroenj.jspells.JMagicJSpells;
 import com.jeroenj.jspells.JSpellManager;
 import com.jeroenj.jspells.JSpellRegistry;
 import com.jeroenj.networking.JMagicPackets;
+import com.jeroenj.networking.JMagicTestPayload;
+import com.jeroenj.networking.codec.JMagicTestRecord;
+import com.jeroenj.networking.persistant.*;
 import com.jeroenj.particles.JMagicParticles;
 import net.fabricmc.api.ModInitializer;
 
 import net.fabricmc.fabric.api.event.lifecycle.v1.ServerTickEvents;
+import net.fabricmc.fabric.api.event.player.PlayerBlockBreakEvents;
+import net.fabricmc.fabric.api.networking.v1.PacketByteBufs;
+import net.fabricmc.fabric.api.networking.v1.PayloadTypeRegistry;
+import net.fabricmc.fabric.api.networking.v1.ServerPlayConnectionEvents;
+import net.fabricmc.fabric.api.networking.v1.ServerPlayNetworking;
+import net.minecraft.block.Blocks;
 import net.minecraft.entity.player.PlayerEntity;
+import net.minecraft.network.PacketByteBuf;
 import net.minecraft.server.MinecraftServer;
 import net.minecraft.server.network.ServerPlayerEntity;
 import net.minecraft.text.MutableText;
@@ -34,6 +44,8 @@ public class JMagic implements ModInitializer {
 	// That way, it's clear which mod wrote info, warnings, and errors.
 	public static final Logger LOGGER = LoggerFactory.getLogger(MOD_ID);
 
+	private int totalDirtBlocksBroken = 0;
+
 	@Override
 	public void onInitialize() {
 		JMagicItems.initialize();
@@ -47,11 +59,52 @@ public class JMagic implements ModInitializer {
 		JMagicPackets.initialize();
 
 		ServerTickEvents.END_SERVER_TICK.register(this::onServerTick);
+
+//		PayloadTypeRegistry.playS2C().register(JMagicTestPayload.ID, JMagicTestPayload.CODEC);
+		PayloadTypeRegistry.playS2C().register(JMagicDirtPayload.ID, JMagicDirtPayload.CODEC);
+		PayloadTypeRegistry.playS2C().register(InitialSyncPayload.ID, InitialSyncPayload.CODEC);
+
+		ServerPlayConnectionEvents.JOIN.register((handler, sender, server) -> {
+			JMagicPlayerData playerState = StateSaverAndLoader.getPlayerState(handler.getPlayer());
+			server.execute(() -> {
+				ServerPlayNetworking.send(handler.getPlayer(), new JMagicDirtPayload(
+						new JMagicDirtData(0, playerState.dirtBlocksBroken)));
+			});
+		});
+
+		PlayerBlockBreakEvents.AFTER.register((world, player, pos, state, entity) -> {
+			if (state.getBlock() == Blocks.GRASS_BLOCK || state.getBlock() == Blocks.DIRT) {
+				StateSaverAndLoader serverState = StateSaverAndLoader.getServerState(world.getServer());
+				// Increment the amount of dirt blocks that have been broken
+				serverState.totalDirtBlocksBroken += 1;
+
+				JMagicPlayerData playerState = StateSaverAndLoader.getPlayerState(player);
+				playerState.dirtBlocksBroken += 1;
+
+				// Send a packet to the client
+				MinecraftServer server = world.getServer();
+
+				ServerPlayerEntity playerEntity = server.getPlayerManager().getPlayer(player.getUuid());
+				server.execute(() -> {
+					ServerPlayNetworking.send(playerEntity, new JMagicDirtPayload(
+							new JMagicDirtData(serverState.totalDirtBlocksBroken, playerState.dirtBlocksBroken)));
+				});
+			}
+		});
 	}
 
+	int tick = 0;
+
 	private void onServerTick(MinecraftServer server) {
+		tick++;
+
 		for (ServerPlayerEntity player : server.getPlayerManager().getPlayerList()) {
 			((ServerPlayerEntityAccess) player).jMagic$getSpellManager().tick(player);
+
+//			if (tick > 120) {
+//				tick = 0;
+//				ServerPlayNetworking.send(player, new JMagicTestPayload(new JMagicTestRecord(1, 2.3, "Banana")));
+//			}
 		}
 	}
 
