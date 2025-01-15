@@ -1,10 +1,12 @@
 package com.jeroenj.jspells;
 
 import com.jeroenj.JMagic;
+import com.jeroenj.util.JHelper;
 import net.minecraft.entity.Entity;
 import net.minecraft.particle.ParticleEffect;
 import net.minecraft.particle.ParticleTypes;
 import net.minecraft.server.world.ServerWorld;
+import net.minecraft.sound.SoundCategory;
 import net.minecraft.sound.SoundEvent;
 import net.minecraft.sound.SoundEvents;
 import net.minecraft.util.math.Vec3d;
@@ -16,7 +18,7 @@ public class TeleportSpell extends JSpell {
     public static final SoundEvent CAST_SOUND = SoundEvents.ENTITY_PLAYER_HURT;
 
     TeleportSpell() {
-        super("Teleport", 20, 60, JMagic.id("hud/icon/teleport"));
+        super(JMagicJSpells.TELEPORT_SPELL, "Teleport", 20, 60, JMagic.id("hud/icon/teleport"));
     }
 
     @Override
@@ -29,15 +31,25 @@ public class TeleportSpell extends JSpell {
                 user.setVelocity(0.0, 0.0, 0.0);
                 user.velocityModified = true;
                 teleportedCaster.onLanding();
-                createParticleCircle(world, ParticleTypes.DRAGON_BREATH, lookingAtPos, 0.75, 32);
+                createParticleCircle(world, ParticleTypes.DRAGON_BREATH, lookingAtPos, 1.0, 24);
             }
         }
     }
 
     private void createParticleCircle(ServerWorld world, ParticleEffect particle, Vec3d position, double radius, int particleAmount) {
-        world.spawnParticles(particle,
-                position.getX(), position.getY() + 0.15, position.getZ(),
-                1, 0,
-                0, 0, 0);
+        double angleStep = 2 * Math.PI / particleAmount;  // Divide the circle into equal parts
+
+        for (int i = 0; i < particleAmount; i++) {
+            double angle = i * angleStep;
+            double xOffset = radius * Math.cos(angle);
+            double zOffset = radius * Math.sin(angle);
+
+            // Spawn the particle at the calculated position
+            world.spawnParticles(particle,
+                    position.getX() + xOffset, position.getY() + 0.1, position.getZ() + zOffset,
+                    1,
+                    0, 0, 0,
+                    0);
+        }
     }
 }

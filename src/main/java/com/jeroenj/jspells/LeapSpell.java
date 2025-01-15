@@ -3,6 +3,7 @@ package com.jeroenj.jspells;
 import com.jeroenj.JMagic;
 import net.minecraft.entity.Entity;
 import net.minecraft.server.world.ServerWorld;
+import net.minecraft.util.Identifier;
 import net.minecraft.util.math.Vec3d;
 import net.minecraft.world.World;
 
@@ -11,7 +12,7 @@ public class LeapSpell extends JSpell {
     public static final float UPWARDS_BOOST = 0.5f;
 
     public LeapSpell() {
-        super("Leap", 20, 60, JMagic.id("hud/icon/leap"));
+        super(JMagicJSpells.LEAP_SPELL, "Leap", 20, 60, JMagic.id("hud/icon/leap"));
     }
 
     @Override

@@ -2,6 +2,7 @@ package com.jeroenj.hud;
 
 import com.jeroenj.JMagic;
 import com.jeroenj.JSpellHelper;
+import com.jeroenj.access.ClientPlayerEntityAccess;
 import com.jeroenj.jspells.JSpell;
 import net.minecraft.client.gui.DrawContext;
 import net.minecraft.client.render.RenderLayer;
@@ -71,28 +72,38 @@ public class SpellSelectHud {
                 int slotX = (int) (originX + Math.cos(angleRad) * WHEEL_RADIUS);
                 int slotY = (int) (originY + Math.sin(angleRad) * WHEEL_RADIUS);
 
-                boolean isSelected = (i == selectedSlot);
-                context.drawGuiTexture(RenderLayer::getGuiTextured,
-                        isSelected ? SPELL_SELECTION_SLOT_SELECTED_TEXTURE : SPELL_SELECTION_SLOT_TEXTURE,
-                        slotX - 12, slotY - 12,
-                        24, 24
-                );
+                if (i == selectedSlot)
+                {
+                    int size = 30;
+                    context.drawGuiTexture(RenderLayer::getGuiTextured,
+                            SPELL_SELECTION_SLOT_SELECTED_TEXTURE,
+                            slotX - size / 2, slotY - size / 2,
+                            size, size
+                    );
+                }
+                else {
+                    context.drawGuiTexture(RenderLayer::getGuiTextured,
+                            SPELL_SELECTION_SLOT_TEXTURE,
+                            slotX - 12, slotY - 12,
+                            24, 24
+                    );
+                }
 
-                // TODO
-//                if (JMagic.spellManager.get(i) instanceof JSpell spell) {
-//                    context.drawGuiTexture(RenderLayer::getGuiTextured,
-//                        spell.getSlotTexture(),
-//                            slotX - 8, slotY - 8,
-//                            16, 16
-//                            );
-//
-//                    JSpellHelper.drawCooldownProgress(context, slotX - 11, slotY - 11, 22, 22, spell.getCooldown(), spell.getCooldownTimer());
-//
-//                    if (selectedSlot == i) {
-//                        context.drawCenteredTextWithShadow(mc.textRenderer,
-//                                Text.literal(spell.getName()).formatted(Formatting.BOLD), originX, originY - (int)(mc.textRenderer.fontHeight * 0.5), 0xFFFFFF);
-//                    }
-//                }
+
+                if (((ClientPlayerEntityAccess) mc.player).jMagic$getClientSpellManager().getSpell(i) instanceof JSpell spell) {
+                    context.drawGuiTexture(RenderLayer::getGuiTextured,
+                        spell.getSlotTexture(),
+                            slotX - 8, slotY - 8,
+                            16, 16
+                            );
+
+                    JSpellHelper.drawCooldownProgress(context, slotX - 11, slotY - 11, 22, 22, spell.getCooldown(), spell.getCooldownTimer());
+
+                    if (selectedSlot == i) {
+                        context.drawCenteredTextWithShadow(mc.textRenderer,
+                                Text.literal(spell.getName()).formatted(Formatting.BOLD), originX, originY - (int)(mc.textRenderer.fontHeight * 0.5), 0xFFFFFF);
+                    }
+                }
             }
         }
         context.getMatrices().pop();

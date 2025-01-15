@@ -1,15 +1,21 @@
 package com.jeroenj;
 
+import com.jeroenj.access.ClientPlayerEntityAccess;
 import com.jeroenj.entity.JMagicEntities;
 import com.jeroenj.entity.JMagicModelLayers;
 import com.jeroenj.entity.MeteorEntityRenderer;
 import com.jeroenj.hud.SpellHud;
 import com.jeroenj.hud.SpellSelectHud;
+import com.jeroenj.item.MagicWand;
+import com.jeroenj.jspells.JMagicJSpells;
 import com.jeroenj.networking.JMagicPackets;
 import com.jeroenj.networking.JMagicTestPayload;
+import com.jeroenj.networking.payload.PlayerSpellsPayload;
+import com.jeroenj.networking.payload.UsedSpellPayload;
 import com.jeroenj.networking.persistant.InitialSyncPayload;
 import com.jeroenj.networking.persistant.JMagicDirtPayload;
 import com.jeroenj.networking.persistant.JMagicPlayerData;
+import com.jeroenj.networking.persistant.LEntry;
 import com.jeroenj.particles.JMagicParticles;
 import net.fabricmc.api.ClientModInitializer;
 import net.fabricmc.api.EnvType;
@@ -60,6 +66,11 @@ public class JMagicClient implements ClientModInitializer {
 			context.client().execute(() -> {
 				context.client().player.sendMessage(Text.literal("Total dirt blocks broken: " + payload.value().serverDirt()), false);
 				context.client().player.sendMessage(Text.literal("player specific dirt blocks broken: " + payload.value().clientDirt()), false);
+
+				for (LEntry entry : payload.value().list())
+				{
+					context.client().player.sendMessage(Text.literal("List: " + entry.i() + " : " + entry.d()), false);
+				}
 			});
 		});
 
@@ -68,6 +79,13 @@ public class JMagicClient implements ClientModInitializer {
 
 			context.client().execute(() -> {
 				context.client().player.sendMessage(Text.literal("Initial specific dirt blocks broken: " + playerData.dirtBlocksBroken), false);
+			});
+		});
+
+		// Sync Spells
+		ClientPlayNetworking.registerGlobalReceiver(PlayerSpellsPayload.ID, (payload, context) -> {
+			context.client().execute(() -> {
+				((ClientPlayerEntityAccess) context.client().player).jMagic$getClientSpellManager().setSpells(payload.data().spells());
 			});
 		});
 	}
@@ -98,9 +116,7 @@ public class JMagicClient implements ClientModInitializer {
 				}
 
 				if (isSelectSpellKeyPressed && !isKeyPressed) {
-					// Send Packet
-					// TODO JMagic.spellManager.select(SpellSelectHud.hide());
-					SpellSelectHud.hide();
+					((ClientPlayerEntityAccess) mc.player).jMagic$getClientSpellManager().selectSpell(SpellSelectHud.hide());
 				}
 
 				isSelectSpellKeyPressed = isKeyPressed;

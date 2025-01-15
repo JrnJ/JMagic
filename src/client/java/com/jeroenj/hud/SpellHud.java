@@ -2,6 +2,7 @@ package com.jeroenj.hud;
 
 import com.jeroenj.JMagic;
 import com.jeroenj.JSpellHelper;
+import com.jeroenj.access.ClientPlayerEntityAccess;
 import com.jeroenj.attachments.JMagicAttachmentTypes;
 import com.jeroenj.item.JMagicItems;
 import com.jeroenj.jspells.JMagicJSpells;
@@ -40,8 +41,7 @@ public class SpellHud implements HudRenderCallback {
         int i = context.getScaledWindowWidth() / 2;
         int offhandSlotWidth = 29;
 
-        // TODO: JSpell selectedSpell = JMagic.spellManager.getSelected();
-        JSpell selectedSpell = JSpellRegistry.getSpell(JMagic.id("meteor"));
+        JSpell selectedSpell = ((ClientPlayerEntityAccess) mc.player).jMagic$getClientSpellManager().getSelectedSpell();
         if (mc.player.getMainArm() == Arm.LEFT) {
             int x = i - 91 - 29;
             int y = context.getScaledWindowHeight() - 23;

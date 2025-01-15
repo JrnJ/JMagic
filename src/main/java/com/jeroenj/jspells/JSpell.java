@@ -1,11 +1,17 @@
 package com.jeroenj.jspells;
 
+import com.jeroenj.access.ServerPlayerEntityAccess;
 import com.jeroenj.attachments.JMagicAttachmentTypes;
 import com.jeroenj.attachments.JMagicManaAttachment;
+import com.jeroenj.networking.payload.CastSpellPayload;
+import com.jeroenj.networking.payload.UsedSpellData;
+import com.jeroenj.networking.payload.UsedSpellPayload;
 import com.mojang.serialization.Codec;
 import io.netty.buffer.ByteBuf;
+import net.fabricmc.fabric.api.networking.v1.ServerPlayNetworking;
 import net.minecraft.entity.Entity;
 import net.minecraft.network.codec.PacketCodec;
+import net.minecraft.server.network.ServerPlayerEntity;
 import net.minecraft.server.world.ServerWorld;
 import net.minecraft.util.Identifier;
 import net.minecraft.util.math.BlockPos;
@@ -15,6 +21,7 @@ public abstract class JSpell {
 //    public static final Codec<JSpell> CODEC;
 //    public static final PacketCodec<ByteBuf, JSpell> PACKET_CODEC;
 
+    private final Identifier id;
     private final String name;
     private final int manaCost;
     private final int cooldown;
@@ -22,14 +29,15 @@ public abstract class JSpell {
 
     private int cooldownTimer = 0;
 
-    public JSpell(String name, int manaCost, int cooldown, Identifier slotTexture) {
+    public JSpell(Identifier id, String name, int manaCost, int cooldown, Identifier slotTexture) {
+        this.id = id;
         this.name = name;
         this.manaCost = manaCost;
         this.cooldown = cooldown;
         this.slotTexture = slotTexture;
     }
 
-    public final JSpellCastResult cast(ServerWorld world, Entity user) {
+    public final JSpellCastResult cast(ServerWorld world, ServerPlayerEntity user) {
         if (cooldownTimer > 0) {
             return JSpellCastResult.ON_COOLDOWN;
         }
@@ -41,6 +49,12 @@ public abstract class JSpell {
         cooldownTimer = cooldown;
         user.setAttached(JMagicAttachmentTypes.PLAYER_MANA, new JMagicManaAttachment(currentMana - manaCost));
         performCast(world, user);
+
+        // TODO change atTick(0)
+        world.getServer().execute(() -> {
+            ServerPlayNetworking.send(user, new UsedSpellPayload(new UsedSpellData(this.getId(), 0)));
+        });
+
         return JSpellCastResult.SUCCESS;
     }
 
@@ -50,6 +64,10 @@ public abstract class JSpell {
         if (cooldownTimer > 0) {
             cooldownTimer--;
         }
+    }
+
+    public Identifier getId() {
+        return this.id;
     }
 
     public String getName() {
@@ -69,5 +87,8 @@ public abstract class JSpell {
 
     public int getCooldownTimer() {
         return this.cooldownTimer;
+    }
+    public void setCooldownTimer(int cooldown) {
+        cooldownTimer = cooldown;
     }
 }

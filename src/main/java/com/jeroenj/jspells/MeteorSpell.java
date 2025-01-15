@@ -17,7 +17,7 @@ public class MeteorSpell extends JSpell {
     public static final SoundEvent SUMMON_SOUND = SoundEvents.ENTITY_PLAYER_HURT;
 
     MeteorSpell() {
-        super("Meteor", 20, 60, JMagic.id("hud/icon/meteor"));
+        super(JMagicJSpells.METEOR_SPELL, "Meteor", 20, 60, JMagic.id("hud/icon/meteor"));
     }
 
     @Override
