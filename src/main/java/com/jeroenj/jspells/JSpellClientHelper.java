@@ -10,7 +10,7 @@ import net.minecraft.world.RaycastContext;
 
 public final class JSpellClientHelper {
     // Util
-    public static Vec3d GetLookingAt(Entity user, float maxDistance, boolean intersectEntities) {
+    public static Vec3d getLookingAt(Entity user, double maxDistance, boolean intersectEntities) {
         Vec3d start = user.getCameraPosVec(1.0f);
         Vec3d direction = user.getRotationVec(1.0f);
         Vec3d end = start.add(direction.multiply(maxDistance));

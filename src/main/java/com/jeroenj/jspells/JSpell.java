@@ -23,15 +23,17 @@ public abstract class JSpell {
 
     private final Identifier id;
     private final String name;
+    private final String description;
     private final int manaCost;
     private final int cooldown;
     private final Identifier slotTexture;
 
     private int cooldownTimer = 0;
 
-    public JSpell(Identifier id, String name, int manaCost, int cooldown, Identifier slotTexture) {
+    public JSpell(Identifier id, String name, String description, int manaCost, int cooldown, Identifier slotTexture) {
         this.id = id;
         this.name = name;
+        this.description = description;
         this.manaCost = manaCost;
         this.cooldown = cooldown;
         this.slotTexture = slotTexture;
@@ -39,11 +41,11 @@ public abstract class JSpell {
 
     public final JSpellCastResult cast(ServerWorld world, ServerPlayerEntity user) {
         if (cooldownTimer > 0) {
-            return JSpellCastResult.ON_COOLDOWN;
+//            return JSpellCastResult.ON_COOLDOWN;
         }
         int currentMana = user.getAttachedOrCreate(JMagicAttachmentTypes.PLAYER_MANA).getCurrentMana();
         if (manaCost > currentMana) {
-            return JSpellCastResult.NO_MANA;
+//            return JSpellCastResult.NO_MANA;
         }
 
         cooldownTimer = cooldown;
@@ -72,6 +74,9 @@ public abstract class JSpell {
 
     public String getName() {
         return this.name;
+    }
+    public String getDescription() {
+        return this.description;
     }
 
     public int getManaCost() {

@@ -23,22 +23,33 @@ import net.minecraft.world.explosion.Explosion;
 import net.minecraft.world.explosion.ExplosionBehavior;
 
 import java.util.List;
+import java.util.Random;
 
 public class MeteorEntity extends Entity {
-    public static final double FALL_SPEED = -0.1;
+    public static final double FALL_SPEED = -0.5;
     public static final int DESPAWN_AFTER = 15 * 20; // Seconds * 20
     private int lifetime = 0;
+    private Vec3d velocity;
+    private boolean started = false;
 
     public MeteorEntity(EntityType<?> type, World world) {
         super(type, world);
     }
 
+    public void start(Vec3d spawnPosition, Vec3d velocity) {
+        this.setPosition(spawnPosition);
+        this.velocity = velocity;
+        this.setVelocity(this.velocity);
+        this.started = true;
+    }
+
     @Override
     public void tick() {
         super.tick();
+        if (!started) return;
 
-        setVelocity(0.0, FALL_SPEED - 0.4, 0.0);
-        move(MovementType.SELF, getVelocity());
+//        setVelocity(velocity);
+//        move(MovementType.SELF, getVelocity());
         World world = getWorld();
         if (!world.isClient()) {
             JHelper.spawnServerParticle(world, ParticleTypes.FLAME, getPos(), 3, 0.0, 0.0, 0.0, 0.0);

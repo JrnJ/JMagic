@@ -1,6 +1,7 @@
 package com.jeroenj.item;
 
 import com.jeroenj.JMagic;
+import com.jeroenj.armor.JMagicArmorMaterials;
 import com.jeroenj.item.MagicWand;
 import net.minecraft.component.DataComponentTypes;
 import net.minecraft.component.type.EquippableComponent;
@@ -23,18 +24,18 @@ public final class JMagicItems {
             .component(DataComponentTypes.UNBREAKABLE, new UnbreakableComponent(true))
             .component(DataComponentTypes.MAX_STACK_SIZE, 1)
     );
-    public static final Item MAGE_HOOD = register("mage_hood",
-            (settings) -> new ArmorItem(ArmorMaterials.LEATHER, EquipmentType.HELMET, settings), new Item.Settings()
-    );
 
+    public static final Item MAGE_HOOD = register("mage_hood",
+            (settings) -> new ArmorItem(JMagicArmorMaterials.MAGE_ARMOR_MATERIAL, EquipmentType.HELMET, settings), new Item.Settings()
+    );
     public static final Item MAGE_ROBE = register("mage_robe",
-            (settings) -> new ArmorItem(ArmorMaterials.LEATHER, EquipmentType.CHESTPLATE, settings), new Item.Settings()
+            (settings) -> new ArmorItem(JMagicArmorMaterials.MAGE_ARMOR_MATERIAL, EquipmentType.CHESTPLATE, settings), new Item.Settings()
     );
     public static final Item MAGE_LEGGINGS = register("mage_leggings",
-            (settings) -> new ArmorItem(ArmorMaterials.LEATHER, EquipmentType.LEGGINGS, settings), new Item.Settings()
+            (settings) -> new ArmorItem(JMagicArmorMaterials.MAGE_ARMOR_MATERIAL, EquipmentType.LEGGINGS, settings), new Item.Settings()
     );
     public static final Item MAGE_BOOTS = register("mage_boots",
-            (settings) -> new ArmorItem(ArmorMaterials.LEATHER, EquipmentType.BOOTS, settings), new Item.Settings()
+            (settings) -> new ArmorItem(JMagicArmorMaterials.MAGE_ARMOR_MATERIAL, EquipmentType.BOOTS, settings), new Item.Settings()
     );
 
     // Methods

@@ -6,6 +6,7 @@ import com.jeroenj.entity.JMagicModelLayers;
 import com.jeroenj.entity.MeteorEntityRenderer;
 import com.jeroenj.hud.SpellHud;
 import com.jeroenj.hud.SpellSelectHud;
+import com.jeroenj.item.JMagicItems;
 import com.jeroenj.item.MagicWand;
 import com.jeroenj.jspells.JMagicJSpells;
 import com.jeroenj.networking.JMagicPackets;
@@ -32,6 +33,7 @@ import net.minecraft.client.particle.EndRodParticle;
 import net.minecraft.client.util.InputUtil;
 import net.minecraft.server.network.ServerPlayerEntity;
 import net.minecraft.text.Text;
+import net.minecraft.util.Hand;
 import org.lwjgl.glfw.GLFW;
 
 @Environment(EnvType.CLIENT)
@@ -55,6 +57,7 @@ public class JMagicClient implements ClientModInitializer {
 
 		//
 		HudRenderCallback.EVENT.register(new SpellHud());
+		HudRenderCallback.EVENT.register(new SpellSelectHud());
 
 //		ClientPlayNetworking.registerGlobalReceiver(JMagicTestPayload.ID, (payload, context) -> {
 //			context.client().execute(() -> {
@@ -109,17 +112,22 @@ public class JMagicClient implements ClientModInitializer {
 		//
 		ClientTickEvents.END_CLIENT_TICK.register(client -> {
 			{
-				boolean isKeyPressed = selectSpellKeyBinding.isPressed();
+				if (mc.player != null) {
+					if (!mc.player.getStackInHand(Hand.MAIN_HAND).isOf(JMagicItems.MAGIC_WAND)) {
+						return;
+					}
+					boolean isKeyPressed = selectSpellKeyBinding.isPressed();
 
-				if (!isSelectSpellKeyPressed && isKeyPressed) {
-					SpellSelectHud.show();
+					if (!isSelectSpellKeyPressed && isKeyPressed) {
+						SpellSelectHud.show();
+					}
+
+					if (isSelectSpellKeyPressed && !isKeyPressed) {
+						((ClientPlayerEntityAccess) mc.player).jMagic$getClientSpellManager().selectSpell(SpellSelectHud.hide());
+					}
+
+					isSelectSpellKeyPressed = isKeyPressed;
 				}
-
-				if (isSelectSpellKeyPressed && !isKeyPressed) {
-					((ClientPlayerEntityAccess) mc.player).jMagic$getClientSpellManager().selectSpell(SpellSelectHud.hide());
-				}
-
-				isSelectSpellKeyPressed = isKeyPressed;
 			}
 		});
 	}

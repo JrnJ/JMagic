@@ -9,12 +9,25 @@ import net.minecraft.sound.SoundCategory;
 import net.minecraft.sound.SoundEvent;
 import net.minecraft.util.hit.EntityHitResult;
 import net.minecraft.util.hit.HitResult;
+import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.Box;
 import net.minecraft.util.math.Vec3d;
 import net.minecraft.world.RaycastContext;
 import net.minecraft.world.World;
 
 public final class JHelper {
+
+    // World
+    public static BlockPos getClosestBlockBelow(Vec3d position, World world, double maxRange) {
+        // Starting at the given position, move downwards in the Y-axis to find the closest block
+        for (double y = position.y; y >= position.y - maxRange; y -= 0.5) {  // Check every half block
+            BlockPos blockPos = new BlockPos((int)position.x, (int)y, (int)position.z);
+            if (!world.getBlockState(blockPos).isAir()) {  // If the block is not air, return it
+                return blockPos;
+            }
+        }
+        return null;
+    }
 
     // Particles
     public static void spawnServerParticle(World world, ParticleEffect particle, double x, double y, double z, int count, double offsetX, double offsetY, double offsetZ, double speed) {

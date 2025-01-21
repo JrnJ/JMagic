@@ -1,6 +1,7 @@
 package com.jeroenj;
 
 import com.jeroenj.access.ServerPlayerEntityAccess;
+import com.jeroenj.armor.JMagicArmorMaterials;
 import com.jeroenj.attachments.JMagicAttachmentTypes;
 import com.jeroenj.block.JMagicBlockEntityTypes;
 import com.jeroenj.block.JMagicBlocks;
@@ -62,6 +63,7 @@ public class JMagic implements ModInitializer {
 		JMagicAttachmentTypes.initialize();
 		JMagicParticles.initialize();
 		JMagicPackets.initialize();
+		JMagicArmorMaterials.initialize();
 
 //		PayloadTypeRegistry.playS2C().register(JMagicTestPayload.ID, JMagicTestPayload.CODEC);
 		PayloadTypeRegistry.playS2C().register(JMagicDirtPayload.ID, JMagicDirtPayload.CODEC);

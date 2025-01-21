@@ -5,7 +5,8 @@
   "client": [
     "ClientPlayerEntityMixin",
     "ExampleClientMixin",
-    "InGameHudMixin"
+    "InGameHudMixin",
+    "InventoryScreenMixin"
   ],
   "injectors": {
     "defaultRequire": 1

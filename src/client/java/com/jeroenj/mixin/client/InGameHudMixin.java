@@ -17,12 +17,6 @@ import static com.jeroenj.JMagicClient.mc;
 
 @Mixin(InGameHud.class)
 public class InGameHudMixin {
-
-    @Inject(at = @At("HEAD"), method = "render")
-    private void render(DrawContext context, RenderTickCounter tickCounter, CallbackInfo ci) {
-        SpellSelectHud.render(context, tickCounter);
-    }
-
     @Inject(at = @At("HEAD"), method = "renderCrosshair", cancellable = true)
     private void renderCrosshair(DrawContext context, RenderTickCounter tickCounter, CallbackInfo ci) {
         if (SpellSelectHud.isShowing()) {
