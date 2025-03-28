@@ -25,7 +25,7 @@ import net.minecraft.world.explosion.ExplosionBehavior;
 import java.util.List;
 import java.util.Random;
 
-public class MeteorEntity extends Entity {
+public class MeteorEntity extends JEntity {
     public static final double FALL_SPEED = -0.5;
     public static final int DESPAWN_AFTER = 15 * 20; // Seconds * 20
     private int lifetime = 0;
@@ -33,7 +33,7 @@ public class MeteorEntity extends Entity {
     private boolean started = false;
 
     public MeteorEntity(EntityType<?> type, World world) {
-        super(type, world);
+        super(type, world, DESPAWN_AFTER);
     }
 
     public void start(Vec3d spawnPosition, Vec3d velocity) {
@@ -46,30 +46,39 @@ public class MeteorEntity extends Entity {
     @Override
     public void tick() {
         super.tick();
-        if (!started) return;
+        smoothTest();
+        return;
 
-//        setVelocity(velocity);
-//        move(MovementType.SELF, getVelocity());
-        World world = getWorld();
-        if (!world.isClient()) {
-            JHelper.spawnServerParticle(world, ParticleTypes.FLAME, getPos(), 3, 0.0, 0.0, 0.0, 0.0);
-
-            if (BlockPos.stream(getBoundingBox().expand(0.75))
-                    .map(world::getBlockState)
-                    .filter(state -> !state.isOf(Blocks.AIR))
-                    .toArray().length > 0)
-            {
-                onHit();
-            }
-//            if (world.getBlockState(getBlockPos().down()).isOpaque()) {
+//        if (!started) return;
+//
+////        setVelocity(velocity);
+////        move(MovementType.SELF, getVelocity());
+//        World world = getWorld();
+//        if (!world.isClient()) {
+//            JHelper.spawnServerParticle(world, ParticleTypes.FLAME, getPos(), 3, 0.0, 0.0, 0.0, 0.0);
+//
+//            if (BlockPos.stream(getBoundingBox().expand(0.75))
+//                    .map(world::getBlockState)
+//                    .filter(state -> !state.isOf(Blocks.AIR))
+//                    .toArray().length > 0)
+//            {
 //                onHit();
 //            }
-        }
+////            if (world.getBlockState(getBlockPos().down()).isOpaque()) {
+////                onHit();
+////            }
+//        }
+//
+//        if (lifetime >= DESPAWN_AFTER) {
+//            this.remove(RemovalReason.DISCARDED);
+//        }
+//        lifetime++;
+    }
 
-        if (lifetime >= DESPAWN_AFTER) {
-            this.remove(RemovalReason.DISCARDED);
-        }
-        lifetime++;
+    private void smoothTest() {
+        velocity = new Vec3d(0.0, -0.8, 0.0);
+        this.setVelocity(velocity);
+        this.move(MovementType.SELF, this.getVelocity());
     }
 
     private void onHit() {

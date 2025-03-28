@@ -61,9 +61,9 @@ public class SpellSelectHud implements HudRenderCallback {
     // Second ring with 12(x) extra slots - Mex
     @Override
     public void onHudRender(DrawContext context, RenderTickCounter renderTickCounter) {
-//        if (!showAbilitySelectHud) {
-//            return;
-//        }
+        if (!showAbilitySelectHud) {
+            return;
+        }
 
         context.getMatrices().push();
         // Wheel

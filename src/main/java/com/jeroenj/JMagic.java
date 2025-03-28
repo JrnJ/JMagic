@@ -89,7 +89,8 @@ public class JMagic implements ModInitializer {
 								(
 										JMagicJSpells.METEOR_SPELL,
 										JMagicJSpells.TELEPORT_SPELL,
-										JMagicJSpells.LEAP_SPELL
+										JMagicJSpells.LEAP_SPELL,
+										JMagicJSpells.MANA_BOLT_SPELL
 								)
 						)
 				));

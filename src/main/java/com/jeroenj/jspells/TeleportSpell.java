@@ -5,6 +5,7 @@ import net.minecraft.entity.Entity;
 import net.minecraft.particle.ParticleEffect;
 import net.minecraft.particle.ParticleTypes;
 import net.minecraft.server.world.ServerWorld;
+import net.minecraft.sound.SoundCategory;
 import net.minecraft.sound.SoundEvent;
 import net.minecraft.sound.SoundEvents;
 import net.minecraft.util.math.Vec3d;
@@ -25,10 +26,11 @@ public class TeleportSpell extends JSpell {
         if (world instanceof ServerWorld serverWorld) {
             Entity teleportedCaster = user.teleportTo(new TeleportTarget(serverWorld, lookingAtPos, user.getVelocity(), user.getYaw(), user.getPitch(), TeleportTarget.NO_OP));
             if (teleportedCaster != null) {
-                user.setVelocity(0.0, 0.0, 0.0);
+                user.setVelocity(user.getVelocity().getX(), 0.0, user.getVelocity().getZ());
                 user.velocityModified = true;
                 teleportedCaster.onLanding();
                 createParticleCircle(world, ParticleTypes.DRAGON_BREATH, lookingAtPos, 1.0, 24);
+                world.playSound(null, user.getX(), user.getY(), user.getZ(), SoundEvents.ENTITY_PLAYER_TELEPORT, SoundCategory.PLAYERS, 1.0f, 1.0f);
             }
         }
     }

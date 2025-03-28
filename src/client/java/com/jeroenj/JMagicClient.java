@@ -3,12 +3,14 @@ package com.jeroenj;
 import com.jeroenj.access.ClientPlayerEntityAccess;
 import com.jeroenj.entity.JMagicEntities;
 import com.jeroenj.entity.JMagicModelLayers;
+import com.jeroenj.entity.ManaBoltEntityRenderer;
 import com.jeroenj.entity.MeteorEntityRenderer;
 import com.jeroenj.hud.SpellHud;
 import com.jeroenj.hud.SpellSelectHud;
 import com.jeroenj.item.JMagicItems;
 import com.jeroenj.item.MagicWand;
 import com.jeroenj.jspells.JMagicJSpells;
+import com.jeroenj.model.MagicWandItemRenderer;
 import com.jeroenj.networking.JMagicPackets;
 import com.jeroenj.networking.JMagicTestPayload;
 import com.jeroenj.networking.payload.PlayerSpellsPayload;
@@ -30,6 +32,7 @@ import net.fabricmc.fabric.api.client.rendering.v1.HudRenderCallback;
 import net.minecraft.client.MinecraftClient;
 import net.minecraft.client.option.KeyBinding;
 import net.minecraft.client.particle.EndRodParticle;
+import net.minecraft.client.render.item.model.special.SpecialModelTypes;
 import net.minecraft.client.util.InputUtil;
 import net.minecraft.server.network.ServerPlayerEntity;
 import net.minecraft.text.Text;
@@ -50,6 +53,8 @@ public class JMagicClient implements ClientModInitializer {
 		mc = MinecraftClient.getInstance();
 
 		JMagicModelLayers.initialize();
+		// https://github.com/Nic4Las/Minecraft-Enderite-Mod/tree/Fabric-1.20
+//		SpecialModelTypes.ID_MAPPER.put(JMagic.id("magic_wand"), new MagicWandItemRenderer());
 
 		registerParticlesOnClient();
 		registerKeybinds();
@@ -99,6 +104,7 @@ public class JMagicClient implements ClientModInitializer {
 
 	private void registerEntityRenderers() {
 		EntityRendererRegistry.register(JMagicEntities.METEOR, MeteorEntityRenderer::new);
+		EntityRendererRegistry.register(JMagicEntities.MANA_BOLT, ManaBoltEntityRenderer::new);
 	}
 
 	private static boolean isSelectSpellKeyPressed = false;

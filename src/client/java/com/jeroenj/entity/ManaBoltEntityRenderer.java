@@ -1,8 +1,6 @@
 package com.jeroenj.entity;
 
 import com.jeroenj.JMagic;
-import net.fabricmc.api.EnvType;
-import net.fabricmc.api.Environment;
 import net.minecraft.client.render.OverlayTexture;
 import net.minecraft.client.render.RenderLayer;
 import net.minecraft.client.render.VertexConsumer;
@@ -12,14 +10,13 @@ import net.minecraft.client.util.math.MatrixStack;
 import net.minecraft.util.Identifier;
 import net.minecraft.util.math.RotationAxis;
 
-@Environment(EnvType.CLIENT)
-public class MeteorEntityRenderer extends JEntityRenderer<MeteorEntity> {
-    public static final Identifier TEXTURE = JMagic.id("textures/entity/meteor.png");
-    private final MeteorEntityModel model;
+public class ManaBoltEntityRenderer extends JEntityRenderer<ManaBoltEntity> {
+    public static final Identifier TEXTURE = JMagic.id("textures/entity/mana_bolt.png");
+    private final ManaBoltEntityModel model;
 
-    public MeteorEntityRenderer(EntityRendererFactory.Context context) {
+    public ManaBoltEntityRenderer(EntityRendererFactory.Context context) {
         super(context);
-        model = new MeteorEntityModel(context.getPart(JMagicModelLayers.METEOR), this::getRenderLayer);
+        model = new ManaBoltEntityModel(context.getPart(JMagicModelLayers.MANA_BOLT), this::getRenderLayer);
     }
 
     @Override

@@ -2,6 +2,7 @@ package com.jeroenj.mixin;
 
 import com.jeroenj.JMagic;
 import com.jeroenj.access.ServerPlayerEntityAccess;
+import com.jeroenj.jspells.JMagicJSpells;
 import com.jeroenj.jspells.JSpellManager;
 import com.jeroenj.jspells.JSpellRegistry;
 import net.minecraft.server.network.ServerPlayerEntity;
@@ -19,9 +20,10 @@ public class ServerPlayerEntityMixin implements ServerPlayerEntityAccess {
 
     @Unique
     private final JSpellManager spellManager = new JSpellManager(new ArrayList<>(List.of(
-            JSpellRegistry.getSpell(JMagic.id("meteor")),
-            JSpellRegistry.getSpell(JMagic.id("teleport")),
-            JSpellRegistry.getSpell(JMagic.id("leap"))
+            JSpellRegistry.getSpell(JMagicJSpells.METEOR_SPELL),
+            JSpellRegistry.getSpell(JMagicJSpells.TELEPORT_SPELL),
+            JSpellRegistry.getSpell(JMagicJSpells.LEAP_SPELL),
+            JSpellRegistry.getSpell(JMagicJSpells.MANA_BOLT_SPELL)
     )));
 
     @Override

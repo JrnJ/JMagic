@@ -3,6 +3,8 @@ package com.jeroenj.jspells;
 import com.jeroenj.JMagic;
 import net.minecraft.entity.Entity;
 import net.minecraft.server.world.ServerWorld;
+import net.minecraft.sound.SoundCategory;
+import net.minecraft.sound.SoundEvents;
 import net.minecraft.util.Identifier;
 import net.minecraft.util.math.Vec3d;
 import net.minecraft.world.World;
@@ -27,5 +29,6 @@ public class LeapSpell extends JSpell {
 
         user.addVelocity(leapVelocity.x, leapVelocity.y, leapVelocity.z);
         user.velocityModified = true;
+        world.playSound(null, user.getX(), user.getY(), user.getZ(), SoundEvents.ENTITY_FIREWORK_ROCKET_LAUNCH, SoundCategory.PLAYERS, 1.0f, 1.0f);
     }
 }

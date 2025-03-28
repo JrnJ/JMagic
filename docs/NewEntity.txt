@@ -1,0 +1,19 @@
+# Code
+- in main/.../entity/ create an <EntityName>.java and extend from JEntity
+- in main/.../JMagicEnties register your Entity
+- in client/.../entity/ create:
+ - <EntityName>Renderer.java
+ - <EntityName>RenderState.java (or use JEntityRenderState if none needed)
+ - <EntityName>Model.java
+
+- in client/.../JMagicClient.java, add your Renderer to registerEntityRenderers()
+- in client/.../entity/JMagicModelLayers add your layer
+
+# Model
+- Make a model(Minecraft -> Modded Entity) in Blockbench and texture it
+- Move the texture to 'resources\assets\jmagic\textures\entity'
+- Export(File -> Export -> Java Entity) next to the .bb file
+
+# Code
+- Open the java file and copy the needed code into <EntityName>EntityModel.java (getTexturedModelData())
+- You can see if it works by doing serverWorld.spawnEntity(new <EntityName>Entity(serverWorld));

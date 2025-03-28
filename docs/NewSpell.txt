@@ -1,0 +1,14 @@
+- in main/.../jspells add <SpellName>.java
+- have it extend JSpell and implement ctor / methods / etc
+- in main/.../jspells/JMagicJSpells.java add your Identifier and register it in te init method
+- in <SpellName>.java...
+ - ctor remove all constructor variables
+ - id -> JMagicJSpells.<SpellName>
+ - texture -> create a new texture in hud folder
+- In performCast, add System.out.println("MySpell!");
+
+# Extra
+To use it ingame:
+- go to main/.../JMagic.java and add it to the existing spell list
+- go to main/.../ServerPlayerEntityMixin.java and add it to the existing spell list
+Run your game

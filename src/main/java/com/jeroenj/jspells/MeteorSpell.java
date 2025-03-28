@@ -26,7 +26,7 @@ public class MeteorSpell extends JSpell {
 
     @Override
     protected void performCast(ServerWorld world, Entity user) {
-        double ADDED_HEIGHT = 10.0;
+        double ADDED_HEIGHT = 15.0;
         double METEOR_SPEED = 0.5;
 
         Vec3d lookingAtPos = JSpellClientHelper.getLookingAt(user, MAX_DISTANCE, true);
