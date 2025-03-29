@@ -1,6 +1,7 @@
 package com.jeroenj.hud;
 
 import com.jeroenj.JMagic;
+import com.jeroenj.JMagicClient;
 import com.jeroenj.JSpellHelper;
 import com.jeroenj.access.ClientPlayerEntityAccess;
 import com.jeroenj.attachments.JMagicAttachmentTypes;
@@ -29,33 +30,78 @@ public class SpellHud implements HudRenderCallback {
     public void onHudRender(DrawContext drawContext, RenderTickCounter renderTickCounter) {
         if (mc.player.getStackInHand(Hand.MAIN_HAND).isOf(JMagicItems.MAGIC_WAND)) {
             int currentMana = mc.player.getAttachedOrCreate(JMagicAttachmentTypes.PLAYER_MANA).getCurrentMana();
-            renderSelectedSpell(drawContext);
+
             renderManaBar(drawContext, currentMana);
             renderManaBarText(drawContext, currentMana);
+
+            renderSelectedSpell(drawContext);
+            renderQuickCastSpells(drawContext);
         }
     }
 
     private void renderSelectedSpell(DrawContext context) {
         context.getMatrices().push();
         context.getMatrices().translate(0.0, 0.0, 3000.0);
-        int i = context.getScaledWindowWidth() / 2;
+        int hotBarEndX = 91;
+        int SLOT_SIZE = 16;
+
+        int screenCenterX = context.getScaledWindowWidth() / 2;
         int offhandSlotWidth = 29;
+
+        int y = context.getScaledWindowHeight() - 23;
 
         JSpell selectedSpell = ((ClientPlayerEntityAccess) mc.player).jMagic$getClientSpellManager().getSelectedSpell();
         if (mc.player.getMainArm() == Arm.LEFT) {
-            int x = i - 91 - 29;
-            int y = context.getScaledWindowHeight() - 23;
+            int x = screenCenterX - hotBarEndX - 29;
             context.drawGuiTexture(RenderLayer::getGuiTextured, SPELL_LEFT_TEXTURE, x, y, offhandSlotWidth, 24);
-            context.drawGuiTexture(RenderLayer::getGuiTextured, selectedSpell.getSlotTexture(), x + 3, y + 4, 16, 16);
-            JSpellHelper.drawCooldownProgress(context,x + 3, y + 4, 16, 16, selectedSpell.getCooldown(), selectedSpell.getCooldownTimer());
+            context.drawGuiTexture(RenderLayer::getGuiTextured, selectedSpell.getSlotTexture(), x + 3, y + 4, SLOT_SIZE, SLOT_SIZE);
+            JSpellHelper.drawCooldownProgress(context,x + 3, y + 4, SLOT_SIZE, SLOT_SIZE, selectedSpell.getCooldown(), selectedSpell.getCooldownTimer());
         } else {
-            int x = i + 91;
-            int y = context.getScaledWindowHeight() - 23;
+            int x = screenCenterX + hotBarEndX;
             context.drawGuiTexture(RenderLayer::getGuiTextured, SPELL_RIGHT_TEXTURE, x, y, offhandSlotWidth, 24);
-            context.drawGuiTexture(RenderLayer::getGuiTextured, selectedSpell.getSlotTexture(), x + 10, y + 4, 16, 16);
-            JSpellHelper.drawCooldownProgress(context,x + 10, y + 4, 16, 16, selectedSpell.getCooldown(), selectedSpell.getCooldownTimer());
+            context.drawGuiTexture(RenderLayer::getGuiTextured, selectedSpell.getSlotTexture(), x + 10, y + 4, SLOT_SIZE, SLOT_SIZE);
+            JSpellHelper.drawCooldownProgress(context,x + 10, y + 4, SLOT_SIZE, SLOT_SIZE, selectedSpell.getCooldown(), selectedSpell.getCooldownTimer());
         }
         context.getMatrices().pop();
+    }
+
+    private void renderQuickCastSpells(DrawContext context) {
+        context.getMatrices().push();
+
+        // Draw amount of keybinds
+        int TOTAL_QUICK_CASTS = 4;
+        int SLOT_SIZE = 16;
+        int hotBarEndX = 91;
+        int screenCenterX = context.getScaledWindowWidth() / 2;
+        int offhandSlotWidth = 29;
+
+        for (int i = 0; i < TOTAL_QUICK_CASTS; i++) {
+            JSpell quickCastSpell = ((ClientPlayerEntityAccess) mc.player).jMagic$getClientSpellManager().getSpell(i);
+            if (quickCastSpell == null) {
+                continue;
+            }
+
+            int y = context.getScaledWindowHeight() - 23;
+
+            // Always right as LEFT just kinda doesn't work
+            int x = screenCenterX + hotBarEndX +
+                    ((i + (mc.player.getMainArm() == Arm.LEFT && mc.player.getOffHandStack().isEmpty() ? 0 : 1)) * 24);
+            context.drawGuiTexture(RenderLayer::getGuiTextured, SPELL_RIGHT_TEXTURE, x, y, offhandSlotWidth, 24);
+            context.drawGuiTexture(RenderLayer::getGuiTextured, quickCastSpell.getSlotTexture(), x + 10, y + 4, SLOT_SIZE, SLOT_SIZE);
+            JSpellHelper.drawCooldownProgress(context,x + 10, y + 4, SLOT_SIZE, SLOT_SIZE, quickCastSpell.getCooldown(), quickCastSpell.getCooldownTimer());
+            JSpellHelper.drawOutlinedText(context, getKeyBindingKey(i), x + (24 / 2) + 4, y - 2, 0xFFFFFFFF);
+        }
+
+        context.getMatrices().pop();
+    }
+
+    private String getKeyBindingKey(int index) {
+        return switch (index) {
+            case 1 -> JMagicClient.quickCast2.getBoundKeyLocalizedText().getLiteralString();
+            case 2 -> JMagicClient.quickCast3.getBoundKeyLocalizedText().getLiteralString();
+            case 3 -> JMagicClient.quickCast4.getBoundKeyLocalizedText().getLiteralString();
+            default -> JMagicClient.quickCast1.getBoundKeyLocalizedText().getLiteralString();
+        };
     }
 
     private void renderManaBar(DrawContext context, int mana) {
@@ -83,7 +129,7 @@ public class SpellHud implements HudRenderCallback {
         String text = mana + "";
         int textX = (context.getScaledWindowWidth() - mc.textRenderer.getWidth(text)) / 2;
         int textY = (context.getScaledWindowHeight() - 32 + 3) - 6;
-        JSpellHelper.drawOutlinedText(context, text, textX, textY);
+        JSpellHelper.drawOutlinedText(context, text, textX, textY, 0xFF30ACCC);
 
         context.getMatrices().pop();
     }

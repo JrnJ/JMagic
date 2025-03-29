@@ -51,6 +51,10 @@ public class JClientSpellManager implements ClientSpellCaster {
         ClientPlayNetworking.send(new CastSpellPayload(new CastSpellData(selectedSpell.getId())));
     }
 
+    public void castSpell(int index) {
+        ClientPlayNetworking.send(new CastSpellPayload(new CastSpellData(getSpell(index).getId())));
+    }
+
     public JSpell getSelectedSpell() {
         return selectedSpell;
     }

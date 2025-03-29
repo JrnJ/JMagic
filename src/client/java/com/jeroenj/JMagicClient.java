@@ -46,6 +46,11 @@ public class JMagicClient implements ClientModInitializer {
 	// Keybindings
 	public static KeyBinding selectSpellKeyBinding;
 
+	public static KeyBinding quickCast1;
+	public static KeyBinding quickCast2;
+	public static KeyBinding quickCast3;
+	public static KeyBinding quickCast4;
+
 	public static JMagicPlayerData playerData = new JMagicPlayerData();
 
 	@Override
@@ -115,6 +120,30 @@ public class JMagicClient implements ClientModInitializer {
 				"category.jmagic.jmagic"
 		));
 
+		quickCast1 = KeyBindingHelper.registerKeyBinding(new KeyBinding(
+				"key.jmagic.quick_cast_1",
+				InputUtil.Type.KEYSYM, GLFW.GLFW_KEY_Z,
+				"category.jmagic.jmagic"
+		));
+
+		quickCast2 = KeyBindingHelper.registerKeyBinding(new KeyBinding(
+				"key.jmagic.quick_cast_2",
+				InputUtil.Type.KEYSYM, GLFW.GLFW_KEY_X,
+				"category.jmagic.jmagic"
+		));
+
+		quickCast3 = KeyBindingHelper.registerKeyBinding(new KeyBinding(
+				"key.jmagic.quick_cast_3",
+				InputUtil.Type.KEYSYM, GLFW.GLFW_KEY_C,
+				"category.jmagic.jmagic"
+		));
+
+		quickCast4 = KeyBindingHelper.registerKeyBinding(new KeyBinding(
+				"key.jmagic.quick_cast_4",
+				InputUtil.Type.KEYSYM, GLFW.GLFW_KEY_V,
+				"category.jmagic.jmagic"
+		));
+
 		//
 		ClientTickEvents.END_CLIENT_TICK.register(client -> {
 			{
@@ -133,6 +162,22 @@ public class JMagicClient implements ClientModInitializer {
 					}
 
 					isSelectSpellKeyPressed = isKeyPressed;
+				}
+
+				while (quickCast1.wasPressed()) {
+					((ClientPlayerEntityAccess) mc.player).jMagic$getClientSpellManager().castSpell(0);
+				}
+
+				while (quickCast2.wasPressed()) {
+					((ClientPlayerEntityAccess) mc.player).jMagic$getClientSpellManager().castSpell(1);
+				}
+
+				while (quickCast3.wasPressed()) {
+					((ClientPlayerEntityAccess) mc.player).jMagic$getClientSpellManager().castSpell(2);
+				}
+
+				while (quickCast4.wasPressed()) {
+					((ClientPlayerEntityAccess) mc.player).jMagic$getClientSpellManager().castSpell(3);
 				}
 			}
 		});

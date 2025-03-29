@@ -12,11 +12,11 @@ public final class JSpellHelper {
         context.fill(RenderLayer.getGui(), x, y + sizeY - progress, x + sizeX, y + sizeY, 200, 0x70FFFFFF);
     }
 
-    public static void drawOutlinedText(DrawContext context, String text, int x, int y) {
+    public static void drawOutlinedText(DrawContext context, String text, int x, int y, int color) {
         context.drawText(mc.textRenderer, text, x + 1, y, 0, false);
         context.drawText(mc.textRenderer, text, x - 1, y, 0, false);
         context.drawText(mc.textRenderer, text, x, y + 1, 0, false);
         context.drawText(mc.textRenderer, text, x, y - 1, 0, false);
-        context.drawText(mc.textRenderer, text, x, y, 0xFF30ACCC, false);
+        context.drawText(mc.textRenderer, text, x, y, color, false);
     }
 }
