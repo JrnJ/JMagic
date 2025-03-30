@@ -20,12 +20,16 @@ import static com.jeroenj.JMagicClient.mc;
 
 public class SpellSelectHud implements HudRenderCallback {
     public static final Identifier SPELL_INFO_BACKGROUND = JMagic.id("hud/spell_info_background");
+    public static final Identifier CATEGORY_BACKGROUND = JMagic.id("hud/category_background");
+    public static final Identifier CATEGORY_BACKGROUND_SELECTED_OVERLAY = JMagic.id("hud/category_background_selected_overlay");
 
     public static final int WHEEL_RADIUS = 60;
     public static final int SLOT_COUNT = 8;
     public static final double ANGEL_PER_SLOT = 360.0 / (double)SLOT_COUNT;
 
     private static boolean showAbilitySelectHud = false;
+    private static int categoryIndex = 0;
+    private static final int CATEGORY_COUNT = 8;
     private static double startMouseX;
     private static double startMouseY;
     private static int selectedSlotIndex;
@@ -57,8 +61,22 @@ public class SpellSelectHud implements HudRenderCallback {
         return showAbilitySelectHud;
     }
 
-    // Also on scroll switch slot - Mex
-    // Second ring with 12(x) extra slots - Mex
+    public static void increaseCategory() {
+        if (categoryIndex < CATEGORY_COUNT - 1) {
+            categoryIndex++;
+        } else {
+            categoryIndex = 0;
+        }
+    }
+
+    public static void decreaseCategory() {
+        if (categoryIndex > 0) {
+            categoryIndex--;
+        } else {
+            categoryIndex = CATEGORY_COUNT - 1;
+        }
+    }
+
     @Override
     public void onHudRender(DrawContext context, RenderTickCounter renderTickCounter) {
         if (!showAbilitySelectHud) {
@@ -102,38 +120,62 @@ public class SpellSelectHud implements HudRenderCallback {
             slotWidget.render(context, renderTickCounter, originX, originY);
         }
 
-        if (selectedSlot.getSpell() != null) {
-            // Text
-            JSpell selectedSpell = selectedSlot.getSpell();
-            context.drawCenteredTextWithShadow(mc.textRenderer,
-                    Text.literal(selectedSpell.getName()).formatted(Formatting.BOLD), originX, originY - (int)(mc.textRenderer.fontHeight * 0.5), 0xFFFFFF);
-
-            // Info Screen
-            int infoMargin = 10;
-
-            int infoWidth = 100;
-            int infoHeight = WHEEL_RADIUS * 2 + SpellSelectSlotWidget.SLOT_SIZE;
-
-            int infoX = originX - (WHEEL_RADIUS + infoWidth + SpellSelectSlotWidget.SLOT_SIZE + infoMargin);
-            int infoY = originY - (infoHeight / 2);
-            context.drawGuiTexture(RenderLayer::getGuiTextured, SPELL_INFO_BACKGROUND,
-                    infoX, infoY,
-                    infoWidth, infoHeight
-            );
-
-            context.drawGuiTexture(RenderLayer::getGuiTextured, selectedSpell.getSlotTexture(),
-                    infoX + 4, infoY + 4,
-                    18, 18
-            );
-            context.drawTextWithShadow(mc.textRenderer,
-                    Text.literal(selectedSpell.getName()).formatted(Formatting.BOLD),
-                    infoX + 26, infoY + 4, 0xFFFFFFFF);
+//        if (selectedSlot.getSpell() != null) {
+//            // Text
+//            JSpell selectedSpell = selectedSlot.getSpell();
+//            context.drawCenteredTextWithShadow(mc.textRenderer,
+//                    Text.literal(selectedSpell.getName()).formatted(Formatting.BOLD), originX, originY - (int)(mc.textRenderer.fontHeight * 0.5), 0xFFFFFF);
+//
+//            // Info Screen
+//            int infoMargin = 10;
+//
+//            int infoWidth = 100;
+//            int infoHeight = WHEEL_RADIUS * 2 + SpellSelectSlotWidget.SLOT_SIZE;
+//
+//            int infoX = originX - (WHEEL_RADIUS + infoWidth + SpellSelectSlotWidget.SLOT_SIZE + infoMargin);
+//            int infoY = originY - (infoHeight / 2);
+//            context.drawGuiTexture(RenderLayer::getGuiTextured, SPELL_INFO_BACKGROUND,
+//                    infoX, infoY,
+//                    infoWidth, infoHeight
+//            );
+//
+//            context.drawGuiTexture(RenderLayer::getGuiTextured, selectedSpell.getSlotTexture(),
+//                    infoX + 4, infoY + 4,
+//                    18, 18
+//            );
 //            context.drawTextWithShadow(mc.textRenderer,
-////                    Text.literal(selectedSlot.getSpell().getName()).formatted(Formatting.AQUA),
-////                    infoX + 26, infoY + 4 + 10, 0xFFFFFFFF);
-            context.drawTextWithShadow(mc.textRenderer,
-                    Text.literal(selectedSpell.getDescription()),
-                    infoX + 4, infoY + 18 + 24, 0xFFFFFFFF);
+//                    Text.literal(selectedSpell.getName()).formatted(Formatting.BOLD),
+//                    infoX + 26, infoY + 4, 0xFFFFFFFF);
+////            context.drawTextWithShadow(mc.textRenderer,
+//////                    Text.literal(selectedSlot.getSpell().getName()).formatted(Formatting.AQUA),
+//////                    infoX + 26, infoY + 4 + 10, 0xFFFFFFFF);
+//            context.drawTextWithShadow(mc.textRenderer,
+//                    Text.literal(selectedSpell.getDescription()),
+//                    infoX + 4, infoY + 18 + 24, 0xFFFFFFFF);
+//        }
+        context.getMatrices().pop();
+
+        // Categories
+        renderCategories(context, renderTickCounter);
+    }
+
+    private void renderCategories(DrawContext context, RenderTickCounter renderTickCounter) {
+        context.getMatrices().push();
+        for (int i = 0; i < CATEGORY_COUNT; i++) {
+            int categoryHeight = 16;
+            int x = 100;
+            int y = 100 + (categoryHeight * i);
+
+            if (categoryIndex == i) {
+                context.drawGuiTexture(RenderLayer::getGuiTextured, CATEGORY_BACKGROUND_SELECTED_OVERLAY,
+                        x, y, 100, 12);
+            } else {
+                context.drawGuiTexture(RenderLayer::getGuiTextured, CATEGORY_BACKGROUND,
+                        x, y, 100, 12);
+            }
+
+            context.drawCenteredTextWithShadow(mc.textRenderer,
+                    "Category #" + (i + 1), x + 50, y + 2, 0xFFFFFFFF);
         }
         context.getMatrices().pop();
     }

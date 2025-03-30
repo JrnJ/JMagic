@@ -6,7 +6,8 @@
     "ClientPlayerEntityMixin",
     "ExampleClientMixin",
     "InGameHudMixin",
-    "InventoryScreenMixin"
+    "InventoryScreenMixin",
+    "MouseMixin"
   ],
   "injectors": {
     "defaultRequire": 1

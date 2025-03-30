@@ -10,6 +10,10 @@
   "itemGroup.jmagic.jmagic_group": "JMagic",
 
   "key.jmagic.select_ability": "Select Ability",
+  "key.jmagic.quick_cast_1": "Quick Cast 1",
+  "key.jmagic.quick_cast_2": "Quick Cast 2",
+  "key.jmagic.quick_cast_3": "Quick Cast 3",
+  "key.jmagic.quick_cast_4": "Quick Cast 4",
 
   "category.jmagic.jmagic": "JMagic"
 }
