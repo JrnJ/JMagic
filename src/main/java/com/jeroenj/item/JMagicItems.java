@@ -2,6 +2,7 @@ package com.jeroenj.item;
 
 import com.jeroenj.JMagic;
 import com.jeroenj.armor.JMagicArmorMaterials;
+import com.jeroenj.entity.JMagicEntities;
 import com.jeroenj.item.MagicWand;
 import net.minecraft.component.DataComponentTypes;
 import net.minecraft.component.type.EquippableComponent;
@@ -36,6 +37,15 @@ public final class JMagicItems {
     );
     public static final Item MAGE_BOOTS = register("mage_boots",
             (settings) -> new ArmorItem(JMagicArmorMaterials.MAGE_ARMOR_MATERIAL, EquipmentType.BOOTS, settings), new Item.Settings()
+    );
+
+    // Scrolls
+    public static final Item SPELL_SCROLL = register("spell_scroll", Item::new, new Item.Settings()
+            .component(DataComponentTypes.MAX_STACK_SIZE, 16)
+    );
+
+    public static final Item FIREBALL_SPELL_SCROLL = register("fireball_spell_scroll", Item::new, new Item.Settings()
+            .component(DataComponentTypes.MAX_STACK_SIZE, 16)
     );
 
     // Methods

@@ -2,9 +2,9 @@
 - in main/.../entity/ create an <EntityName>.java and extend from JEntity
 - in main/.../JMagicEnties register your Entity
 - in client/.../entity/ create:
- - <EntityName>Renderer.java
- - <EntityName>RenderState.java (or use JEntityRenderState if none needed)
- - <EntityName>Model.java
+ - <EntityName>EntityRenderer.java
+ - <EntityName>EntityRenderState.java (or use JEntityRenderState if none needed)
+ - <EntityName>EntityModel.java
 
 - in client/.../JMagicClient.java, add your Renderer to registerEntityRenderers()
 - in client/.../entity/JMagicModelLayers add your layer

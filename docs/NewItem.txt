@@ -1,0 +1,9 @@
+# Code
+- in main/.../item/JMagicItems add your Item
+- in main/.../JmagicItemGroups add your Item to the group
+
+# Resources
+- in the resources lang file add your item name
+- /items/<item>.json
+- /models/item/<item>.json
+- /textures/item/<item>.png
