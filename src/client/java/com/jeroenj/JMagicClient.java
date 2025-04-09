@@ -1,6 +1,7 @@
 package com.jeroenj;
 
 import com.jeroenj.access.ClientPlayerEntityAccess;
+import com.jeroenj.entity.Fairy.FairyEntityRenderer;
 import com.jeroenj.entity.JMagicEntities;
 import com.jeroenj.entity.JMagicModelLayers;
 import com.jeroenj.entity.ManaBoltEntityRenderer;
@@ -111,6 +112,7 @@ public class JMagicClient implements ClientModInitializer {
 	private void registerEntityRenderers() {
 		EntityRendererRegistry.register(JMagicEntities.METEOR, MeteorEntityRenderer::new);
 		EntityRendererRegistry.register(JMagicEntities.MANA_BOLT, ManaBoltEntityRenderer::new);
+		EntityRendererRegistry.register(JMagicEntities.FAIRY, FairyEntityRenderer::new);
 	}
 
 	private static boolean isSelectSpellKeyPressed = false;

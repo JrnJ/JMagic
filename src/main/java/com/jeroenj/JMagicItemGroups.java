@@ -21,6 +21,9 @@ public final class JMagicItemGroups {
                 entries.add(JMagicItems.MAGE_BOOTS);
                 entries.add(JMagicBlocks.MAGE_TABLE_BLOCK);
 
+                // Spawn Eggs
+                entries.add(JMagicItems.FAIRY_SPAWN_EGG);
+
                 // All Scrolls at the end
                 entries.add(JMagicItems.SPELL_SCROLL);
                 entries.add(JMagicItems.FIREBALL_SPELL_SCROLL);

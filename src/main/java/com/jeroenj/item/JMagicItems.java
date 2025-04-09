@@ -39,6 +39,11 @@ public final class JMagicItems {
             (settings) -> new ArmorItem(JMagicArmorMaterials.MAGE_ARMOR_MATERIAL, EquipmentType.BOOTS, settings), new Item.Settings()
     );
 
+    // Spawn Eggs
+    public static final Item FAIRY_SPAWN_EGG = register("fairy_spawn_egg",
+            (settings) -> new SpawnEggItem(JMagicEntities.FAIRY, settings), new Item.Settings()
+    );
+
     // Scrolls
     public static final Item SPELL_SCROLL = register("spell_scroll", Item::new, new Item.Settings()
             .component(DataComponentTypes.MAX_STACK_SIZE, 16)

@@ -6,8 +6,11 @@
   "item.jmagic.mage_boots": "Mage Boots",
   "item.jmagic.spell_scroll": "Spell Scroll",
   "item.jmagic.fireball_spell_scroll": "Fireball Spell Scroll",
+  "item.jmagic.fairy_spawn_egg": "Fairy Spawn Egg",
 
   "block.jmagic.mage_table": "Mage Table",
+
+  "entity.jmagic.fairy": "Fairy",
 
   "itemGroup.jmagic.jmagic_group": "JMagic",
 

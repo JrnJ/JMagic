@@ -25,6 +25,14 @@ public final class JMagicEntities {
                     .dimensions(1.0f, 1.0f)
                     .build(RegistryKey.of(RegistryKeys.ENTITY_TYPE, MANA_BOLT_ENTITY)));
 
+    // Mobs
+    public static final Identifier FAIRY_ENTITY = JMagic.id("fairy");
+    public static final EntityType<FairyEntity> FAIRY = Registry.register(
+            Registries.ENTITY_TYPE, FAIRY_ENTITY,
+            EntityType.Builder.create(FairyEntity::new, SpawnGroup.CREATURE)
+                    .dimensions(1.0f, 1.0f)
+                    .build(RegistryKey.of(RegistryKeys.ENTITY_TYPE, FAIRY_ENTITY)));
+
     public static void initialize() {
 
     }
