@@ -1,0 +1,17 @@
+{
+  "block.jmagic.mage_table": "Mage Table",
+  "category.jmagic.jmagic": "JMagic",
+  "item.jmagic.fireball_spell_scroll": "Fireball Spell Scroll",
+  "item.jmagic.mage_boots": "Mage Boots",
+  "item.jmagic.mage_hood": "Mage Hood",
+  "item.jmagic.mage_leggings": "Mage Leggings",
+  "item.jmagic.mage_robe": "Mage Robe",
+  "item.jmagic.magic_wand": "Magic Wand",
+  "item.jmagic.spell_scroll": "Spell Scroll",
+  "itemGroup.jmagic.jmagic_group": "JMagic",
+  "key.jmagic.quick_cast_1": "Quick Cast 1",
+  "key.jmagic.quick_cast_2": "Quick Cast 2",
+  "key.jmagic.quick_cast_3": "Quick Cast 3",
+  "key.jmagic.quick_cast_4": "Quick Cast 4",
+  "key.jmagic.select_ability": "Select Ability"
+}

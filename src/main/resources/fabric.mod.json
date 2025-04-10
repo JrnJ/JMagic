@@ -3,9 +3,9 @@
 	"id": "jmagic",
 	"version": "${version}",
 	"name": "JMagic",
-	"description": "This is an example description! Tell everyone what your mod is about!",
+	"description": "Magic mod!",
 	"authors": [
-		"Me!"
+		"Jeroen"
 	],
 	"contact": {
 		"homepage": "https://fabricmc.net/",
