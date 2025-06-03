@@ -22,9 +22,13 @@ public class JMagicEnUsLangProvider extends JMagicLanguageProvider {
         translationBuilder.add(JMagicItems.MAGE_BOOTS, "Mage Boots");
         translationBuilder.add(JMagicItems.SPELL_SCROLL, "Spell Scroll");
         translationBuilder.add(JMagicItems.FIREBALL_SPELL_SCROLL, "Fireball Spell Scroll");
+        translationBuilder.add(JMagicItems.KITSUNE_FLAME, "Kitsune Flame");
 
         // Blocks
         translationBuilder.add(JMagicBlocks.MAGE_TABLE_BLOCK, "Mage Table");
+
+        // Effects
+        StatusEffectWithPotion(translationBuilder, "kitsune_flames", "Kitsune Flames");
 
         // Item Groups
         translationBuilder.add(ItemGroup("jmagic_group"), "JMagic");

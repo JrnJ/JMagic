@@ -10,6 +10,7 @@ import com.mojang.serialization.Codec;
 import io.netty.buffer.ByteBuf;
 import net.fabricmc.fabric.api.networking.v1.ServerPlayNetworking;
 import net.minecraft.entity.Entity;
+import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.network.codec.PacketCodec;
 import net.minecraft.server.network.ServerPlayerEntity;
 import net.minecraft.server.world.ServerWorld;
@@ -27,7 +28,7 @@ public abstract class JSpell {
     private final String name;
     private final String description;
     private final int manaCost;
-    private final int cooldown;
+    private final int cooldown; // in ticks
     private final Identifier slotTexture;
 
     private int cooldownTimer = 0;
@@ -62,7 +63,15 @@ public abstract class JSpell {
         return JSpellCastResult.SUCCESS;
     }
 
-    protected abstract void performCast(ServerWorld world, Entity user);
+    protected abstract void performCast(ServerWorld world, ServerPlayerEntity user);
+
+    public String spellSelectInfo(PlayerEntity user) {
+        return "";
+    }
+
+    protected void showInfoMessage(String message) {
+
+    }
 
     public void tick() {
         if (cooldownTimer > 0) {

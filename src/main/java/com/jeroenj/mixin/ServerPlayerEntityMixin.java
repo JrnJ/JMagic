@@ -23,7 +23,9 @@ public class ServerPlayerEntityMixin implements ServerPlayerEntityAccess {
             JSpellRegistry.getSpell(JMagicJSpells.METEOR_SPELL),
             JSpellRegistry.getSpell(JMagicJSpells.TELEPORT_SPELL),
             JSpellRegistry.getSpell(JMagicJSpells.LEAP_SPELL),
-            JSpellRegistry.getSpell(JMagicJSpells.MANA_BOLT_SPELL)
+            JSpellRegistry.getSpell(JMagicJSpells.MANA_BOLT_SPELL),
+            JSpellRegistry.getSpell(JMagicJSpells.SHRINK_SPELL),
+            JSpellRegistry.getSpell(JMagicJSpells.GROW_SPELL)
     )));
 
     @Override

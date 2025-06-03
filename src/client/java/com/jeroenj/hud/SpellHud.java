@@ -40,6 +40,11 @@ public class SpellHud implements HudRenderCallback {
     }
 
     private void renderSelectedSpell(DrawContext context) {
+        JSpell selectedSpell = ((ClientPlayerEntityAccess) mc.player).jMagic$getClientSpellManager().getSelectedSpell();
+        if (selectedSpell == null) {
+            return;
+        }
+
         context.getMatrices().push();
         context.getMatrices().translate(0.0, 0.0, 3000.0);
         int hotBarEndX = 91;
@@ -50,7 +55,6 @@ public class SpellHud implements HudRenderCallback {
 
         int y = context.getScaledWindowHeight() - 23;
 
-        JSpell selectedSpell = ((ClientPlayerEntityAccess) mc.player).jMagic$getClientSpellManager().getSelectedSpell();
         if (mc.player.getMainArm() == Arm.LEFT) {
             int x = screenCenterX - hotBarEndX - 29;
             context.drawGuiTexture(RenderLayer::getGuiTextured, SPELL_LEFT_TEXTURE, x, y, offhandSlotWidth, 24);

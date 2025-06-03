@@ -6,6 +6,7 @@ import com.jeroenj.entity.MeteorEntity;
 import com.jeroenj.util.JHelper;
 import net.minecraft.entity.Entity;
 import net.minecraft.particle.ParticleTypes;
+import net.minecraft.server.network.ServerPlayerEntity;
 import net.minecraft.server.world.ServerWorld;
 import net.minecraft.sound.SoundEvent;
 import net.minecraft.sound.SoundEvents;
@@ -25,7 +26,7 @@ public class MeteorSpell extends JSpell {
     }
 
     @Override
-    protected void performCast(ServerWorld world, Entity user) {
+    protected void performCast(ServerWorld world, ServerPlayerEntity user) {
         double ADDED_HEIGHT = 15.0;
         double METEOR_SPEED = 0.5;
 

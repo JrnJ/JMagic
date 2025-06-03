@@ -20,6 +20,7 @@ public final class JMagicItemGroups {
                 entries.add(JMagicItems.MAGE_LEGGINGS);
                 entries.add(JMagicItems.MAGE_BOOTS);
                 entries.add(JMagicBlocks.MAGE_TABLE_BLOCK);
+                entries.add(JMagicItems.KITSUNE_FLAME);
 
                 // All Scrolls at the end
                 entries.add(JMagicItems.SPELL_SCROLL);

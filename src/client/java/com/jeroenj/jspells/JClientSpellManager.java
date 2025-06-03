@@ -48,7 +48,9 @@ public class JClientSpellManager implements ClientSpellCaster {
     }
 
     public void castSpell() {
-        ClientPlayNetworking.send(new CastSpellPayload(new CastSpellData(selectedSpell.getId())));
+        if (selectedSpell != null) {
+            ClientPlayNetworking.send(new CastSpellPayload(new CastSpellData(selectedSpell.getId())));
+        }
     }
 
     public void castSpell(int index) {

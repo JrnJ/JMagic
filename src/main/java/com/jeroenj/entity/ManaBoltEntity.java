@@ -1,6 +1,7 @@
 package com.jeroenj.entity;
 
 import net.minecraft.entity.EntityType;
+import net.minecraft.entity.MovementType;
 import net.minecraft.entity.damage.DamageSource;
 import net.minecraft.entity.data.DataTracker;
 import net.minecraft.nbt.NbtCompound;
@@ -17,10 +18,19 @@ public class ManaBoltEntity extends JEntity {
         super(type, world, DESPAWN_AFTER);
     }
 
-    public void start(Vec3d spawnPosition, Vec3d velocity) {
+    public void start(Vec3d spawnPosition, Vec3d velocity, float yaw, float pitch) {
         this.setPosition(spawnPosition);
         this.velocity = velocity;
+        this.setRotation(yaw, pitch);
         this.setVelocity(this.velocity);
+    }
+
+    @Override
+    public void tick() {
+        super.tick();
+        velocity = getDirectionVector();
+        this.setVelocity(velocity);
+        this.move(MovementType.SELF, this.getVelocity());
     }
 
     @Override

@@ -3,7 +3,7 @@ package com.jeroenj.jspells;
 import com.jeroenj.JMagic;
 import com.jeroenj.entity.JMagicEntities;
 import com.jeroenj.entity.ManaBoltEntity;
-import net.minecraft.entity.Entity;
+import net.minecraft.server.network.ServerPlayerEntity;
 import net.minecraft.server.world.ServerWorld;
 import net.minecraft.util.math.Vec3d;
 
@@ -13,9 +13,9 @@ public class ManaBoltSpell extends JSpell {
     }
 
     @Override
-    protected void performCast(ServerWorld world, Entity user) {
+    protected void performCast(ServerWorld world, ServerPlayerEntity user) {
         ManaBoltEntity manaBolt = new ManaBoltEntity(JMagicEntities.MANA_BOLT, world);
-        manaBolt.start(user.getPos(), Vec3d.ZERO);
+        manaBolt.start(user.getPos(), new Vec3d(1.0, 0.0, 0.0), user.getYaw(), user.getPitch());
         world.spawnEntity(manaBolt);
     }
 }

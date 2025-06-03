@@ -44,6 +44,14 @@ public class SpellSelectHud implements HudRenderCallback {
         currentSlot = slots.getFirst();
     }
 
+    private static String infoMessage = "";
+    private static int showInfoMessageFor = 0;
+
+    public static void showInfoMessage(String message) {
+        infoMessage = message;
+        showInfoMessageFor = 60;
+    }
+
     public static void show() {
         // Hide crosshair
         showAbilitySelectHud = true;
@@ -119,6 +127,18 @@ public class SpellSelectHud implements HudRenderCallback {
             slotWidget.setSpell(spell);
             slotWidget.render(context, renderTickCounter, originX, originY);
         }
+
+        // Draw info
+        if (selectedSlot.getSpell() != null) {
+            context.drawCenteredTextWithShadow(mc.textRenderer,
+                    selectedSlot.getSpell().spellSelectInfo(mc.player), originX, originY + 80, 0xFFFFFFFF);
+        }
+
+        if (showInfoMessageFor > 0) {
+            context.drawCenteredTextWithShadow(mc.textRenderer,
+                    infoMessage, originX, 50, 0xFFFFFFFF);
+        }
+
 
 //        if (selectedSlot.getSpell() != null) {
 //            // Text

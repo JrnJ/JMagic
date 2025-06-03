@@ -17,6 +17,13 @@ public abstract class JMagicLanguageProvider extends FabricLanguageProvider {
     protected static String Category(String name) {
         return "category." + JMagic.MOD_ID + "." + name;
     }
+    protected static void StatusEffectWithPotion(TranslationBuilder translationBuilder, String key, String name) {
+        translationBuilder.add("effect." + JMagic.MOD_ID + "." + key, name);
+        translationBuilder.add("item.minecraft.potion.effect" + key, "Potion of " + name);
+        translationBuilder.add("item.minecraft.splash_potion.effect" + key, "Splash Potion of " + name);
+        translationBuilder.add("item.minecraft.lingering_potion.effect" + key, "Lingering Potion of " + name);
+        translationBuilder.add("item.minecraft.tipped_arrow.effect" + key, "Arrow of " + name);
+    }
 
     protected JMagicLanguageProvider(FabricDataOutput dataOutput, String languageCode, CompletableFuture<RegistryWrapper.WrapperLookup> registryLookup) {
         super(dataOutput, languageCode, registryLookup);

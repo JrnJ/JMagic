@@ -2,6 +2,7 @@ package com.jeroenj.entity;
 
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityType;
+import net.minecraft.util.math.Vec3d;
 import net.minecraft.world.World;
 
 public abstract class JEntity extends Entity {
@@ -26,5 +27,16 @@ public abstract class JEntity extends Entity {
 
     protected void beforeDespawn() {
 
+    }
+
+    protected Vec3d getDirectionVector() {
+        double yawRad = Math.toRadians(-getYaw());
+        double pitchRad = Math.toRadians(-getPitch());
+
+        double x = Math.sin(yawRad) * Math.cos(pitchRad);
+        double y = Math.sin(pitchRad);
+        double z = Math.cos(yawRad) * Math.cos(pitchRad);
+
+        return new Vec3d(x, y, z);
     }
 }

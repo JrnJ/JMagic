@@ -5,6 +5,7 @@ import com.jeroenj.armor.JMagicArmorMaterials;
 import com.jeroenj.attachments.JMagicAttachmentTypes;
 import com.jeroenj.block.JMagicBlockEntityTypes;
 import com.jeroenj.block.JMagicBlocks;
+import com.jeroenj.effect.JMagicEffects;
 import com.jeroenj.entity.JMagicEntities;
 import com.jeroenj.item.JMagicItems;
 import com.jeroenj.jspells.JMagicJSpells;
@@ -19,6 +20,7 @@ import com.jeroenj.networking.payload.PlayerSpellsPayload;
 import com.jeroenj.networking.payload.UsedSpellPayload;
 import com.jeroenj.networking.persistant.*;
 import com.jeroenj.particles.JMagicParticles;
+import com.jeroenj.potion.JMagicPotions;
 import net.fabricmc.api.ModInitializer;
 
 import net.fabricmc.fabric.api.event.lifecycle.v1.ServerTickEvents;
@@ -54,6 +56,8 @@ public class JMagic implements ModInitializer {
 
 	@Override
 	public void onInitialize() {
+		JMagicEffects.initialize();
+		JMagicPotions.initialize();
 		JMagicItems.initialize();
 		JMagicBlocks.initialize();
 		JMagicBlockEntityTypes.initialize();
@@ -90,7 +94,9 @@ public class JMagic implements ModInitializer {
 										JMagicJSpells.METEOR_SPELL,
 										JMagicJSpells.TELEPORT_SPELL,
 										JMagicJSpells.LEAP_SPELL,
-										JMagicJSpells.MANA_BOLT_SPELL
+										JMagicJSpells.MANA_BOLT_SPELL,
+										JMagicJSpells.SHRINK_SPELL,
+										JMagicJSpells.GROW_SPELL
 								)
 						)
 				));

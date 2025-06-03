@@ -4,6 +4,7 @@ import com.jeroenj.JMagic;
 import net.minecraft.entity.Entity;
 import net.minecraft.particle.ParticleEffect;
 import net.minecraft.particle.ParticleTypes;
+import net.minecraft.server.network.ServerPlayerEntity;
 import net.minecraft.server.world.ServerWorld;
 import net.minecraft.sound.SoundCategory;
 import net.minecraft.sound.SoundEvent;
@@ -20,7 +21,7 @@ public class TeleportSpell extends JSpell {
     }
 
     @Override
-    protected void performCast(ServerWorld world, Entity user) {
+    protected void performCast(ServerWorld world, ServerPlayerEntity user) {
         Vec3d lookingAtPos = JSpellClientHelper.getLookingAt(user, MAX_DISTANCE, true);
 
         if (world instanceof ServerWorld serverWorld) {

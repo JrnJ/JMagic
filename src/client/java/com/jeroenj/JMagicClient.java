@@ -8,13 +8,7 @@ import com.jeroenj.entity.MeteorEntityRenderer;
 import com.jeroenj.hud.SpellHud;
 import com.jeroenj.hud.SpellSelectHud;
 import com.jeroenj.item.JMagicItems;
-import com.jeroenj.item.MagicWand;
-import com.jeroenj.jspells.JMagicJSpells;
-import com.jeroenj.model.MagicWandItemRenderer;
-import com.jeroenj.networking.JMagicPackets;
-import com.jeroenj.networking.JMagicTestPayload;
 import com.jeroenj.networking.payload.PlayerSpellsPayload;
-import com.jeroenj.networking.payload.UsedSpellPayload;
 import com.jeroenj.networking.persistant.InitialSyncPayload;
 import com.jeroenj.networking.persistant.JMagicDirtPayload;
 import com.jeroenj.networking.persistant.JMagicPlayerData;
@@ -29,13 +23,10 @@ import net.fabricmc.fabric.api.client.networking.v1.ClientPlayNetworking;
 import net.fabricmc.fabric.api.client.particle.v1.ParticleFactoryRegistry;
 import net.fabricmc.fabric.api.client.rendering.v1.EntityRendererRegistry;
 import net.fabricmc.fabric.api.client.rendering.v1.HudRenderCallback;
-import net.fabricmc.fabric.api.client.screen.v1.ScreenMouseEvents;
 import net.minecraft.client.MinecraftClient;
 import net.minecraft.client.option.KeyBinding;
 import net.minecraft.client.particle.EndRodParticle;
-import net.minecraft.client.render.item.model.special.SpecialModelTypes;
 import net.minecraft.client.util.InputUtil;
-import net.minecraft.server.network.ServerPlayerEntity;
 import net.minecraft.text.Text;
 import net.minecraft.util.Hand;
 import org.lwjgl.glfw.GLFW;
@@ -115,7 +106,7 @@ public class JMagicClient implements ClientModInitializer {
 
 	private static boolean isSelectSpellKeyPressed = false;
 	private void registerKeybinds() {
-		selectSpellKeyBinding = KeyBindingHelper.registerKeyBinding(new KeyBinding(
+				selectSpellKeyBinding = KeyBindingHelper.registerKeyBinding(new KeyBinding(
 				"key.jmagic.select_ability",
 				InputUtil.Type.KEYSYM, GLFW.GLFW_KEY_R,
 				"category.jmagic.jmagic"

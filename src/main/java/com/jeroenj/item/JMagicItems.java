@@ -39,6 +39,8 @@ public final class JMagicItems {
             (settings) -> new ArmorItem(JMagicArmorMaterials.MAGE_ARMOR_MATERIAL, EquipmentType.BOOTS, settings), new Item.Settings()
     );
 
+    public static final Item KITSUNE_FLAME = register("kitsune_flame", Item::new, new Item.Settings());
+
     // Scrolls
     public static final Item SPELL_SCROLL = register("spell_scroll", Item::new, new Item.Settings()
             .component(DataComponentTypes.MAX_STACK_SIZE, 16)

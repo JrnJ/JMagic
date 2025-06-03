@@ -22,10 +22,13 @@ public class ManaBoltEntityRenderer extends JEntityRenderer<ManaBoltEntity> {
     @Override
     public void render(JEntityRenderState state, MatrixStack matrices, VertexConsumerProvider vertexConsumers, int light) {
         matrices.push();
-        matrices.multiply(RotationAxis.POSITIVE_Y.rotationDegrees(state.yaw));
-        matrices.multiply(RotationAxis.POSITIVE_Z.rotationDegrees(state.pitch));
+
+        matrices.multiply(RotationAxis.NEGATIVE_Y.rotationDegrees(state.yaw));
+        matrices.multiply(RotationAxis.POSITIVE_X.rotationDegrees(state.pitch));
+
         VertexConsumer vertexConsumer = vertexConsumers.getBuffer(model.getLayer(TEXTURE));
         this.model.render(matrices, vertexConsumer, light, OverlayTexture.DEFAULT_UV);
+
         matrices.pop();
 
         super.render(state, matrices, vertexConsumers, light);
