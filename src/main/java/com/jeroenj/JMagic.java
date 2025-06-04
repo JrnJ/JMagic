@@ -9,11 +9,7 @@ import com.jeroenj.effect.JMagicEffects;
 import com.jeroenj.entity.JMagicEntities;
 import com.jeroenj.item.JMagicItems;
 import com.jeroenj.jspells.JMagicJSpells;
-import com.jeroenj.jspells.JSpellManager;
-import com.jeroenj.jspells.JSpellRegistry;
 import com.jeroenj.networking.JMagicPackets;
-import com.jeroenj.networking.JMagicTestPayload;
-import com.jeroenj.networking.codec.JMagicTestRecord;
 import com.jeroenj.networking.payload.CastSpellPayload;
 import com.jeroenj.networking.payload.PlayerSpellsData;
 import com.jeroenj.networking.payload.PlayerSpellsPayload;
@@ -23,25 +19,19 @@ import com.jeroenj.particles.JMagicParticles;
 import com.jeroenj.potion.JMagicPotions;
 import net.fabricmc.api.ModInitializer;
 
-import net.fabricmc.fabric.api.event.lifecycle.v1.ServerTickEvents;
 import net.fabricmc.fabric.api.event.player.PlayerBlockBreakEvents;
-import net.fabricmc.fabric.api.networking.v1.PacketByteBufs;
 import net.fabricmc.fabric.api.networking.v1.PayloadTypeRegistry;
 import net.fabricmc.fabric.api.networking.v1.ServerPlayConnectionEvents;
 import net.fabricmc.fabric.api.networking.v1.ServerPlayNetworking;
 import net.minecraft.block.Blocks;
-import net.minecraft.entity.player.PlayerEntity;
-import net.minecraft.network.PacketByteBuf;
 import net.minecraft.server.MinecraftServer;
 import net.minecraft.server.network.ServerPlayerEntity;
-import net.minecraft.server.world.ServerWorld;
 import net.minecraft.text.MutableText;
 import net.minecraft.text.Text;
 import net.minecraft.util.Identifier;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import java.util.ArrayList;
 import java.util.List;
 
 public class JMagic implements ModInitializer {
@@ -68,6 +58,7 @@ public class JMagic implements ModInitializer {
 		JMagicParticles.initialize();
 		JMagicPackets.initialize();
 		JMagicArmorMaterials.initialize();
+//		JMagicStructureSets.initialize();
 
 //		PayloadTypeRegistry.playS2C().register(JMagicTestPayload.ID, JMagicTestPayload.CODEC);
 		PayloadTypeRegistry.playS2C().register(JMagicDirtPayload.ID, JMagicDirtPayload.CODEC);
