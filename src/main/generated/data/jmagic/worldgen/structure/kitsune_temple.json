@@ -1,7 +1,7 @@
 {
   "type": "minecraft:jigsaw",
-  "biomes": "#minecraft:has_structure/mineshaft",
   "step": "surface_structures",
+  "biomes": "#jmagic:magical_forest_only",
   "spawn_overrides": {},
   "terrain_adaptation": "beard_thin",
   "start_pool": "jmagic:kitsune_temple",
