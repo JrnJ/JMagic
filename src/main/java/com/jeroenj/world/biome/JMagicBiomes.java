@@ -18,7 +18,7 @@ import net.minecraft.world.gen.feature.VegetationPlacedFeatures;
 // Look at "OverworldBiomeCreator"
 public class JMagicBiomes {
     public static final RegistryKey<Biome> MAGICAL_FOREST_BIOME = RegistryKey.of(RegistryKeys.BIOME,
-            JMagic.id("magical_forest_biome"));
+            JMagic.id("magical_forest"));
 
     public static void bootstrap(Registerable<Biome> context) {
         context.register(MAGICAL_FOREST_BIOME, magicalForestBiome(context));
