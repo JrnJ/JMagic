@@ -5,6 +5,7 @@ import com.jeroenj.entity.JMagicEntities;
 import com.jeroenj.entity.JMagicModelLayers;
 import com.jeroenj.entity.ManaBoltEntityRenderer;
 import com.jeroenj.entity.MeteorEntityRenderer;
+import com.jeroenj.entity.kitsune.KitsuneEntityRenderer;
 import com.jeroenj.hud.SpellHud;
 import com.jeroenj.hud.SpellSelectHud;
 import com.jeroenj.item.JMagicItems;
@@ -102,6 +103,7 @@ public class JMagicClient implements ClientModInitializer {
 	private void registerEntityRenderers() {
 		EntityRendererRegistry.register(JMagicEntities.METEOR, MeteorEntityRenderer::new);
 		EntityRendererRegistry.register(JMagicEntities.MANA_BOLT, ManaBoltEntityRenderer::new);
+		EntityRendererRegistry.register(JMagicEntities.KITSUNE, KitsuneEntityRenderer::new);
 	}
 
 	private static boolean isSelectSpellKeyPressed = false;
