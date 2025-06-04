@@ -17,7 +17,6 @@ import com.jeroenj.networking.payload.UsedSpellPayload;
 import com.jeroenj.networking.persistant.*;
 import com.jeroenj.particles.JMagicParticles;
 import com.jeroenj.potion.JMagicPotions;
-import com.jeroenj.world.structure.JMagicStructureSets;
 import net.fabricmc.api.ModInitializer;
 
 import net.fabricmc.fabric.api.event.player.PlayerBlockBreakEvents;

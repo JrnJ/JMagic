@@ -45,26 +45,32 @@ public class JMagicBiomes {
                 new GenerationSettings.LookupBackedBuilder(context.getRegistryLookup(RegistryKeys.PLACED_FEATURE),
                         context.getRegistryLookup(RegistryKeys.CONFIGURED_CARVER));
         globalOverworldGeneration(biomeBuilder);
-        DefaultBiomeFeatures.addMossyRocks(biomeBuilder);
 
-        // Vegetation
-        // Order is VERY VERY VERY important here
-        biomeBuilder.feature(GenerationStep.Feature.VEGETAL_DECORATION, VegetationPlacedFeatures.TREES_PLAINS);
-        DefaultBiomeFeatures.addLargeFerns(biomeBuilder);
+        // 1. Flowers?
+        DefaultBiomeFeatures.addForestFlowers(biomeBuilder);
+
+        // 2. Trees
+        DefaultBiomeFeatures.addForestTrees(biomeBuilder);
+
+        // 3. Vegetation
+        DefaultBiomeFeatures.addDefaultFlowers(biomeBuilder);
+        DefaultBiomeFeatures.addForestGrass(biomeBuilder);
+        DefaultBiomeFeatures.addDefaultMushrooms(biomeBuilder);
+        DefaultBiomeFeatures.addDefaultVegetation(biomeBuilder);
 
         return new Biome.Builder()
                 .precipitation(true)
-                .downfall(0.4f)
-                .temperature(0.7f)
+                .downfall(0.9f)
+                .temperature(0.95f)
                 .generationSettings(biomeBuilder.build())
                 .spawnSettings(spawnBuilder.build())
                 .effects((new BiomeEffects.Builder())
-                        .waterColor(0xe82e3b)
-                        .waterFogColor(0xbf1b26)
-                        .skyColor(0x30c918)
-                        .grassColor(0x7f03fc)
-                        .foliageColor(0xd203fc)
-                        .fogColor(0x22a1e6)
+                        .waterColor(0x3F76E4)
+                        .waterFogColor(0x50533)
+                        .skyColor(0x77A8FF)
+                        .grassColor(0x59C93C)
+                        .foliageColor(0x30BB0B)
+                        .fogColor(0x00C0D8FF)
                         .moodSound(BiomeMoodSound.CAVE).build())
                 .build();
     }
