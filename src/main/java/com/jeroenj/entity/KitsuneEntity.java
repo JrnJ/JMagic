@@ -2,9 +2,11 @@ package com.jeroenj.entity;
 
 import net.minecraft.entity.EntityType;
 import net.minecraft.entity.SpawnReason;
+import net.minecraft.entity.ai.goal.ActiveTargetGoal;
+import net.minecraft.entity.ai.goal.Goal;
 import net.minecraft.entity.passive.AnimalEntity;
+import net.minecraft.entity.passive.ChickenEntity;
 import net.minecraft.entity.passive.PassiveEntity;
-import net.minecraft.entity.passive.PigEntity;
 import net.minecraft.item.ItemStack;
 import net.minecraft.registry.tag.ItemTags;
 import net.minecraft.server.world.ServerWorld;
@@ -13,7 +15,9 @@ import org.jetbrains.annotations.Nullable;
 
 public class KitsuneEntity extends AnimalEntity {
 
-    protected KitsuneEntity(EntityType<? extends AnimalEntity> entityType, World world) {
+    private Goal followChickenGoal;
+
+    public KitsuneEntity(EntityType<? extends AnimalEntity> entityType, World world) {
         super(entityType, world);
     }
 
@@ -26,5 +30,14 @@ public class KitsuneEntity extends AnimalEntity {
     @Override
     public PassiveEntity createChild(ServerWorld serverWorld, PassiveEntity entity) {
         return (KitsuneEntity)JMagicEntities.KITSUNE.create(serverWorld, SpawnReason.BREEDING);
+    }
+
+    protected void initGoals() {
+        followChickenGoal = new ActiveTargetGoal<>(this, AnimalEntity.class, 10, false, false, (entity, world) -> {
+            return entity instanceof ChickenEntity;
+        });
+
+        //
+
     }
 }

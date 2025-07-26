@@ -1,6 +1,7 @@
 package com.jeroenj.entity;
 
 import com.jeroenj.JMagic;
+import net.fabricmc.fabric.api.object.builder.v1.entity.FabricDefaultAttributeRegistry;
 import net.minecraft.entity.EntityType;
 import net.minecraft.entity.SpawnGroup;
 import net.minecraft.registry.Registries;
@@ -33,6 +34,6 @@ public final class JMagicEntities {
                     .build(RegistryKey.of(RegistryKeys.ENTITY_TYPE, KITSUNE_ENTITY)));
 
     public static void initialize() {
-
+        FabricDefaultAttributeRegistry.register(KITSUNE, KitsuneEntity.createAnimalAttributes());
     }
 }
