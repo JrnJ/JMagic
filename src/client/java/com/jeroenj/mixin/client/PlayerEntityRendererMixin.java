@@ -1,6 +1,7 @@
 package com.jeroenj.mixin.client;
 
 import com.jeroenj.featurerender.KitsuneTailFeatureRenderer;
+import com.jeroenj.featurerender.SunGodAuraFeatureRenderer;
 import com.jeroenj.rendering.CustomFeatureRenderer;
 import net.minecraft.client.network.AbstractClientPlayerEntity;
 import net.minecraft.client.render.entity.EntityRendererFactory;
@@ -23,6 +24,7 @@ public abstract class PlayerEntityRendererMixin extends LivingEntityRenderer<Abs
     @Inject(at = @At(value = "TAIL"), method = "<init>")
     private void init(EntityRendererFactory.Context ctx, boolean slim, CallbackInfo ci) {
 //        this.addFeature(new CustomFeatureRenderer(this));
-        this.addFeature(new KitsuneTailFeatureRenderer(this, ctx.getEntityModels()));
+//        this.addFeature(new KitsuneTailFeatureRenderer(this, ctx.getEntityModels()));
+        this.addFeature(new SunGodAuraFeatureRenderer(this, ctx.getEntityModels()));
     }
 }

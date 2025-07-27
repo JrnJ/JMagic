@@ -5,7 +5,9 @@ import com.jeroenj.access.ServerPlayerEntityAccess;
 import com.jeroenj.jspells.JMagicJSpells;
 import com.jeroenj.jspells.JSpellManager;
 import com.jeroenj.jspells.JSpellRegistry;
+import net.minecraft.block.BlockState;
 import net.minecraft.server.network.ServerPlayerEntity;
+import net.minecraft.util.math.BlockPos;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.Unique;
 import org.spongepowered.asm.mixin.injection.At;
@@ -36,5 +38,10 @@ public class ServerPlayerEntityMixin implements ServerPlayerEntityAccess {
     @Inject(at = @At("HEAD"), method = "tick")
     private void tick(CallbackInfo ci) {
         spellManager.tick((ServerPlayerEntity) (Object) this);
+    }
+
+    @Inject(at = @At("HEAD"), method = "fall", cancellable = true)
+    private void fall(double heightDifference, boolean onGround, BlockState state, BlockPos landedPosition, CallbackInfo ci) {
+
     }
 }

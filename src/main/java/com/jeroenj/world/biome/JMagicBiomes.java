@@ -3,14 +3,12 @@ package com.jeroenj.world.biome;
 import com.jeroenj.JMagic;
 import net.minecraft.entity.EntityType;
 import net.minecraft.entity.SpawnGroup;
+import net.minecraft.particle.ParticleTypes;
 import net.minecraft.registry.Registerable;
 import net.minecraft.registry.RegistryKey;
 import net.minecraft.registry.RegistryKeys;
 import net.minecraft.sound.BiomeMoodSound;
-import net.minecraft.world.biome.Biome;
-import net.minecraft.world.biome.BiomeEffects;
-import net.minecraft.world.biome.GenerationSettings;
-import net.minecraft.world.biome.SpawnSettings;
+import net.minecraft.world.biome.*;
 import net.minecraft.world.gen.GenerationStep;
 import net.minecraft.world.gen.feature.DefaultBiomeFeatures;
 import net.minecraft.world.gen.feature.VegetationPlacedFeatures;
@@ -71,6 +69,7 @@ public class JMagicBiomes {
                         .grassColor(0x59C93C)
                         .foliageColor(0x30BB0B)
                         .fogColor(0x00C0D8FF)
+                        .particleConfig(new BiomeParticleConfig(ParticleTypes.SPORE_BLOSSOM_AIR, 0.118093334f))
                         .moodSound(BiomeMoodSound.CAVE).build())
                 .build();
     }

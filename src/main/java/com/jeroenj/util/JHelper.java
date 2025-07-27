@@ -4,9 +4,11 @@ import net.minecraft.entity.Entity;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.entity.projectile.ProjectileUtil;
 import net.minecraft.particle.ParticleEffect;
+import net.minecraft.server.network.ServerPlayerEntity;
 import net.minecraft.server.world.ServerWorld;
 import net.minecraft.sound.SoundCategory;
 import net.minecraft.sound.SoundEvent;
+import net.minecraft.sound.SoundEvents;
 import net.minecraft.util.hit.EntityHitResult;
 import net.minecraft.util.hit.HitResult;
 import net.minecraft.util.math.BlockPos;
@@ -51,8 +53,10 @@ public final class JHelper {
     public static void playServerSound(Entity entity, SoundEvent sound, float volume, float pitch) {
         entity.playSound(sound, volume, pitch);
     }
-    public static void playServerSound(PlayerEntity player, SoundEvent sound, float volume, float pitch) {
-        player.playSound(sound, volume, pitch);
+
+    public static void playServerSound(ServerPlayerEntity player, SoundEvent sound, SoundCategory category, float volume, float pitch) {
+        ServerWorld world = player.getServerWorld();
+        world.playSound(null, player.getX(), player.getY(), player.getZ(), sound, category, volume, pitch);
     }
 
     // Private Helpers

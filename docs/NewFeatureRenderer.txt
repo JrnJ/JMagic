@@ -1,0 +1,13 @@
+# Code
+- in client/.../featurerenderer make <Name>FeatureRenderer
+- in client/.../model make <Name>EntityModel
+- in client/.../mixin/client/PlayerEntityRendererMixin, add you <Name>FeatureRenderer to the init method
+- in client/.../entity/JMagicModelLayers add an EntityModelLayer
+
+# Model
+- Make a model(Minecraft -> Modded Entity) in Blockbench and texture it
+- Move the texture to 'resources\assets\jmagic\textures\entity'
+- Export(File -> Export -> Java Entity) next to the .bb file
+
+# Code
+- Open the java file and copy the needed code into <Name>EntityModel (getTexturedModelData())

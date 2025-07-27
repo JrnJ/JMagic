@@ -1,6 +1,7 @@
 package com.jeroenj.jspells;
 
 import com.jeroenj.JMagic;
+import com.jeroenj.util.JHelper;
 import net.minecraft.entity.Entity;
 import net.minecraft.server.network.ServerPlayerEntity;
 import net.minecraft.server.world.ServerWorld;
@@ -20,7 +21,7 @@ public class LeapSpell extends JSpell {
 
     @Override
     protected void performCast(ServerWorld world, ServerPlayerEntity user) {
-        Vec3d lookDirection = user .getRotationVec(1.0F);
+        Vec3d lookDirection = user.getRotationVec(1.0F);
 
         Vec3d leapVelocity = new Vec3d(
                 lookDirection.x * LEAP_STRENGTH,
@@ -30,6 +31,6 @@ public class LeapSpell extends JSpell {
 
         user.addVelocity(leapVelocity.x, leapVelocity.y, leapVelocity.z);
         user.velocityModified = true;
-        world.playSound(null, user.getX(), user.getY(), user.getZ(), SoundEvents.ENTITY_FIREWORK_ROCKET_LAUNCH, SoundCategory.PLAYERS, 1.0f, 1.0f);
+        JHelper.playServerSound(user, SoundEvents.ENTITY_FIREWORK_ROCKET_LAUNCH, SoundCategory.PLAYERS, 1.0f, 1.0f);
     }
 }

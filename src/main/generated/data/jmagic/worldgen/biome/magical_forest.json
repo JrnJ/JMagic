@@ -16,6 +16,12 @@
       "tick_delay": 6000
     },
     "music_volume": 1.0,
+    "particle": {
+      "options": {
+        "type": "minecraft:spore_blossom_air"
+      },
+      "probability": 0.118093334
+    },
     "sky_color": 7842047,
     "water_color": 4159204,
     "water_fog_color": 329011
