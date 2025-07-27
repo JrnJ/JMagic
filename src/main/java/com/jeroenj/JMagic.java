@@ -17,6 +17,7 @@ import com.jeroenj.networking.payload.UsedSpellPayload;
 import com.jeroenj.networking.persistant.*;
 import com.jeroenj.particles.JMagicParticles;
 import com.jeroenj.potion.JMagicPotions;
+import com.jeroenj.sound.JMagicSounds;
 import net.fabricmc.api.ModInitializer;
 
 import net.fabricmc.fabric.api.event.player.PlayerBlockBreakEvents;
@@ -53,6 +54,7 @@ public class JMagic implements ModInitializer {
 		JMagicBlocks.initialize();
 		JMagicBlockEntityTypes.initialize();
 		JMagicItemGroups.initialize();
+		JMagicSounds.initialize();
 		JMagicEntities.initialize();
 		JMagicJSpells.initialize();
 		JMagicAttachmentTypes.initialize();
@@ -87,7 +89,9 @@ public class JMagic implements ModInitializer {
 										JMagicJSpells.LEAP_SPELL,
 										JMagicJSpells.MANA_BOLT_SPELL,
 										JMagicJSpells.SHRINK_SPELL,
-										JMagicJSpells.GROW_SPELL
+										JMagicJSpells.GROW_SPELL,
+										JMagicJSpells.TOGGLE_SUN_GOD_SPELL,
+										JMagicJSpells.SUN_GOD_GIANT_SPELL
 								)
 						)
 				));

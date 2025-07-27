@@ -5,8 +5,11 @@ import com.jeroenj.access.ServerPlayerEntityAccess;
 import com.jeroenj.jspells.JMagicJSpells;
 import com.jeroenj.jspells.JSpellManager;
 import com.jeroenj.jspells.JSpellRegistry;
+import com.jeroenj.sound.JMagicSounds;
+import com.jeroenj.util.JHelper;
 import net.minecraft.block.BlockState;
 import net.minecraft.server.network.ServerPlayerEntity;
+import net.minecraft.sound.SoundCategory;
 import net.minecraft.util.math.BlockPos;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.Unique;
@@ -27,7 +30,9 @@ public class ServerPlayerEntityMixin implements ServerPlayerEntityAccess {
             JSpellRegistry.getSpell(JMagicJSpells.LEAP_SPELL),
             JSpellRegistry.getSpell(JMagicJSpells.MANA_BOLT_SPELL),
             JSpellRegistry.getSpell(JMagicJSpells.SHRINK_SPELL),
-            JSpellRegistry.getSpell(JMagicJSpells.GROW_SPELL)
+            JSpellRegistry.getSpell(JMagicJSpells.GROW_SPELL),
+            JSpellRegistry.getSpell(JMagicJSpells.TOGGLE_SUN_GOD_SPELL),
+            JSpellRegistry.getSpell(JMagicJSpells.SUN_GOD_GIANT_SPELL)
     )));
 
     @Override
@@ -40,8 +45,10 @@ public class ServerPlayerEntityMixin implements ServerPlayerEntityAccess {
         spellManager.tick((ServerPlayerEntity) (Object) this);
     }
 
-    @Inject(at = @At("HEAD"), method = "fall", cancellable = true)
-    private void fall(double heightDifference, boolean onGround, BlockState state, BlockPos landedPosition, CallbackInfo ci) {
-
+    @Inject(at = @At("HEAD"), method = "jump")
+    private void jump(CallbackInfo ci) {
+        ServerPlayerEntity player = (ServerPlayerEntity)(Object)this;
+        JHelper.playServerSound(
+                player, JMagicSounds.CARTOON_BOING, SoundCategory.PLAYERS, 0.25f, 0.9f + (player.getServerWorld().getRandom().nextFloat() * 0.1f));
     }
 }

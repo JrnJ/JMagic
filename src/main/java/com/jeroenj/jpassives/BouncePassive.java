@@ -1,9 +1,9 @@
 package com.jeroenj.jpassives;
 
+import com.jeroenj.sound.JMagicSounds;
 import com.jeroenj.util.JHelper;
 import net.minecraft.server.network.ServerPlayerEntity;
 import net.minecraft.sound.SoundCategory;
-import net.minecraft.sound.SoundEvents;
 import net.minecraft.util.math.Vec3d;
 
 public class BouncePassive extends JMagicPassive {
@@ -12,8 +12,10 @@ public class BouncePassive extends JMagicPassive {
     @Override
     public void onActivate(ServerPlayerEntity player) {
         if (player.fallDistance >= 5.0f) {
+            if (player.isSneaking()) return;
+
             Vec3d vec3d = player.getVelocity();
-            player.setVelocity(vec3d.x, 0.5f, vec3d.z);
+            player.setVelocity(vec3d.x, 0.75f, vec3d.z);
             player.velocityModified = true;
 
             // Small look-direction boost feels better
@@ -26,7 +28,8 @@ public class BouncePassive extends JMagicPassive {
             player.addVelocity(leapVelocity);
             player.velocityModified = true;
 
-            JHelper.playServerSound(player, SoundEvents.BLOCK_SLIME_BLOCK_FALL, SoundCategory.PLAYERS, 1.0f, 1.0f);
+            JHelper.playServerSound(
+                    player, JMagicSounds.CARTOON_BOING, SoundCategory.PLAYERS, 0.5f, 0.9f + (player.getServerWorld().getRandom().nextFloat() * 0.1f));
         }
     }
 }

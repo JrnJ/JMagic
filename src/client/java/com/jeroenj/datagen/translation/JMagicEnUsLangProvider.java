@@ -2,6 +2,7 @@ package com.jeroenj.datagen.translation;
 
 import com.jeroenj.block.JMagicBlocks;
 import com.jeroenj.item.JMagicItems;
+import com.jeroenj.sound.JMagicSounds;
 import net.fabricmc.fabric.api.datagen.v1.FabricDataOutput;
 import net.minecraft.registry.RegistryWrapper;
 
@@ -42,5 +43,8 @@ public class JMagicEnUsLangProvider extends JMagicLanguageProvider {
 
         // Categories
         translationBuilder.add(Category("jmagic"), "JMagic");
+
+        // Sounds
+        translationBuilder.add(Sound("cartoon_boing"), "Cartoon Boing");
     }
 }

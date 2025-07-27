@@ -25,6 +25,10 @@ public abstract class JMagicLanguageProvider extends FabricLanguageProvider {
         translationBuilder.add("item.minecraft.tipped_arrow.effect" + key, "Arrow of " + name);
     }
 
+    protected static String Sound(String name) {
+        return "sound." + JMagic.MOD_ID + "." + name;
+    }
+
     protected JMagicLanguageProvider(FabricDataOutput dataOutput, String languageCode, CompletableFuture<RegistryWrapper.WrapperLookup> registryLookup) {
         super(dataOutput, languageCode, registryLookup);
     }
