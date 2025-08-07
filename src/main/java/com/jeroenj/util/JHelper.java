@@ -19,6 +19,11 @@ import net.minecraft.world.World;
 
 public final class JHelper {
 
+    // Player
+//    public static Vec3d getLookDirection(ServerPlayerEntity player) {
+//      player.getRotationVec(1.0f);
+//    }
+
     // World
     public static BlockPos getClosestBlockBelow(Vec3d position, World world, double maxRange) {
         // Starting at the given position, move downwards in the Y-axis to find the closest block

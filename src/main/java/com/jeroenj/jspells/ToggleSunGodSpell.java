@@ -9,7 +9,7 @@ import net.minecraft.server.network.ServerPlayerEntity;
 import net.minecraft.server.world.ServerWorld;
 
 public class ToggleSunGodSpell extends JSpell {
-    public boolean active = false;
+    public static boolean active = false;
 
     public ToggleSunGodSpell() {
         super(JMagicJSpells.TOGGLE_SUN_GOD_SPELL, "Sun God", "Become the Sun God", 50, 60, JMagic.id("hud/icon/toggle_sun_god"));

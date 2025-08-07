@@ -20,5 +20,6 @@ public class JMagicModelGenerator extends FabricModelProvider {
     @Override
     public void generateItemModels(ItemModelGenerator itemModelGenerator) {
         itemModelGenerator.register(JMagicItems.SPELL_SCROLL, Models.GENERATED);
+        itemModelGenerator.register(JMagicItems.GOMU_GOMU_NO_MI, Models.GENERATED);
     }
 }

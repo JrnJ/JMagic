@@ -2,8 +2,9 @@
 - in main/.../item/JMagicItems add your Item
 - in main/.../JmagicItemGroups add your Item to the group
 
+# DataGen
+- in client/.../datagen/JMagicModelGenerator add your item
+- in client/.../datagen/translation/JMagicEnUsLangProvider add your item
+
 # Resources
-- in the resources lang file add your item name
-- /items/<item>.json
-- /models/item/<item>.json
 - /textures/item/<item>.png

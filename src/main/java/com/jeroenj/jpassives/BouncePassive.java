@@ -8,6 +8,7 @@ import net.minecraft.util.math.Vec3d;
 
 public class BouncePassive extends JMagicPassive {
     public static final float LEAP_STRENGTH = 0.675f;
+    public boolean playSound = true;
 
     @Override
     public void onActivate(ServerPlayerEntity player) {
@@ -28,8 +29,11 @@ public class BouncePassive extends JMagicPassive {
             player.addVelocity(leapVelocity);
             player.velocityModified = true;
 
-            JHelper.playServerSound(
-                    player, JMagicSounds.CARTOON_BOING, SoundCategory.PLAYERS, 0.5f, 0.9f + (player.getServerWorld().getRandom().nextFloat() * 0.1f));
+            if (playSound) {
+                JHelper.playServerSound(
+                        player, JMagicSounds.CARTOON_BOING, SoundCategory.PLAYERS,
+                        0.5f, 0.9f + (player.getServerWorld().getRandom().nextFloat() * 0.1f));
+            }
         }
     }
 }

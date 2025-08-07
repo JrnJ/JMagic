@@ -2,12 +2,14 @@ package com.jeroenj.jspells;
 
 import com.jeroenj.access.ClientPlayerEntityAccess;
 import com.jeroenj.access.ClientSpellCaster;
+import com.jeroenj.jpassives.JMagicPassive;
 import com.jeroenj.networking.payload.CastSpellData;
 import com.jeroenj.networking.payload.CastSpellPayload;
 import com.jeroenj.networking.payload.UsedSpellPayload;
 import net.fabricmc.fabric.api.client.networking.v1.ClientPlayNetworking;
 import net.minecraft.util.Identifier;
 
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 

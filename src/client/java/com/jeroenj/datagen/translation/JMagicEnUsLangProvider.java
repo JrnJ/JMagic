@@ -25,6 +25,8 @@ public class JMagicEnUsLangProvider extends JMagicLanguageProvider {
         translationBuilder.add(JMagicItems.FIREBALL_SPELL_SCROLL, "Fireball Spell Scroll");
         translationBuilder.add(JMagicItems.KITSUNE_FLAME, "Kitsune Flame");
 
+        translationBuilder.add(JMagicItems.GOMU_GOMU_NO_MI, "Gomu Gomu no Mi");
+
         // Blocks
         translationBuilder.add(JMagicBlocks.MAGE_TABLE_BLOCK, "Mage Table");
 

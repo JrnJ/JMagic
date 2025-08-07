@@ -22,6 +22,9 @@ public final class JMagicItemGroups {
                 entries.add(JMagicBlocks.MAGE_TABLE_BLOCK);
                 entries.add(JMagicItems.KITSUNE_FLAME);
 
+                // Fruits
+                entries.add(JMagicItems.GOMU_GOMU_NO_MI);
+
                 // All Scrolls at the end
                 entries.add(JMagicItems.SPELL_SCROLL);
                 entries.add(JMagicItems.FIREBALL_SPELL_SCROLL);

@@ -50,6 +50,11 @@ public final class JMagicItems {
             .component(DataComponentTypes.MAX_STACK_SIZE, 16)
     );
 
+    // Fruits
+    public static final Item GOMU_GOMU_NO_MI = register("gomu_gomu_no_mi", DevilFruitItem::new, new Item.Settings()
+            .component(DataComponentTypes.MAX_STACK_SIZE, 1)
+    );
+
     // Methods
     public static Item register(String path, Function<Item.Settings, Item> factory, Item.Settings settings) {
         final RegistryKey<Item> registryKey = RegistryKey.of(RegistryKeys.ITEM, JMagic.id(path));

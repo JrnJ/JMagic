@@ -1,6 +1,10 @@
 package com.jeroenj.mixin;
 
+import com.jeroenj.access.ServerPlayerEntityAccess;
 import com.jeroenj.jpassives.BouncePassive;
+import com.jeroenj.jpassives.GroundSlamPassive;
+import com.jeroenj.jspells.JMagicJSpells;
+import com.jeroenj.jspells.SunGodGiantSpell;
 import net.minecraft.entity.damage.DamageSource;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.server.network.ServerPlayerEntity;
@@ -21,8 +25,18 @@ public class PlayerEntityMixin {
     private void handleFallDamage(float fallDistance, float damageMultiplier, DamageSource damageSource, CallbackInfoReturnable<Boolean> cir) {
 
         if ((Object)this instanceof ServerPlayerEntity player) {
-            BouncePassive passive = new BouncePassive();
-            passive.onActivate(player);
+            // Bounce
+            BouncePassive bouncePassive = new BouncePassive();
+
+            // Ground Slam first
+            SunGodGiantSpell spell = ((ServerPlayerEntityAccess) player).jMagic$getSpellManager().getSpell(JMagicJSpells.SUN_GOD_GIANT_SPELL, SunGodGiantSpell.class);
+            if (spell != null && spell.active) {
+                new GroundSlamPassive().onActivate(player);
+                bouncePassive.playSound = false;
+            }
+
+            bouncePassive.onActivate(player);
+
             cir.setReturnValue(false); // always cancel fall damage
         }
     }
@@ -40,7 +54,7 @@ public class PlayerEntityMixin {
         }
 
         if (sneakTicks == MAX_SNEAK_TICKS) {
-            player.addVelocity(0, 5.0, 0);
+            player.addVelocity(0, 2.5, 0);
             player.velocityModified = true;
         }
     }

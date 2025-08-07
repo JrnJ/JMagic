@@ -9,17 +9,21 @@ import net.minecraft.util.Identifier;
 import net.minecraft.world.World;
 
 import java.util.Arrays;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Set;
 
 public class JSpellManager {
     public static final int SPELL_COUNT = 8;
     private JSpell selectedSpell;
 
     private final List<JSpell> spells = Arrays.asList(new JSpell[SPELL_COUNT]);
+    private final HashMap<Identifier, Integer> spellsLookup = new HashMap<>();
 
     public JSpellManager(List<JSpell> spells) {
         for (int i = 0; i < spells.size(); i++) {
             this.spells.set(i, spells.get(i));
+            this.spellsLookup.put(spells.get(i).getId(), i);
         }
 
         selectedSpell = this.spells.getFirst();
@@ -66,17 +70,36 @@ public class JSpellManager {
     }
 
     public JSpell getSpell(Identifier identifier) {
-        for (JSpell spell : this.spells) {
-            if (spell == null) continue;
-
-            Identifier id = spell.getId();
-            if (id.equals(identifier)) {
-                return spell;
-            }
+        Integer spellIndex = this.spellsLookup.get(identifier);
+        if (spellIndex != null) {
+            return this.getSpell(spellIndex);
         }
-
         return null;
     }
+
+    public <T extends JSpell> T getSpell(Identifier identifier, Class<T> clazz) {
+        Integer spellIndex = this.spellsLookup.get(identifier);
+        if (spellIndex != null) {
+            JSpell spell = this.getSpell(spellIndex);
+            if (clazz.isInstance(spell)) {
+                return clazz.cast(spell);
+            }
+        }
+        return null;
+    }
+
+//    public JSpell getSpell(Identifier identifier) {
+//        for (JSpell spell : this.spells) {
+//            if (spell == null) continue;
+//
+//            Identifier id = spell.getId();
+//            if (id.equals(identifier)) {
+//                return spell;
+//            }
+//        }
+//
+//        return null;
+//    }
 
     public JSpell getSelected() {
         return selectedSpell;

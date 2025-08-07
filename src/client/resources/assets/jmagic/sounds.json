@@ -4,5 +4,11 @@
         "sounds": [
             "jmagic:cartoon_boing"
         ]
+    },
+    "ground_impact": {
+        "subtitle": "sound.jmagic.ground_impact",
+        "sounds": [
+            "jmagic:ground_impact"
+        ]
     }
 }

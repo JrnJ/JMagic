@@ -2,6 +2,7 @@ package com.jeroenj.featurerender;
 
 import com.jeroenj.JMagic;
 import com.jeroenj.entity.JMagicModelLayers;
+import com.jeroenj.jspells.ToggleSunGodSpell;
 import com.jeroenj.model.SunGodAuraEntityModel;
 import net.fabricmc.api.EnvType;
 import net.fabricmc.api.Environment;
@@ -34,7 +35,7 @@ public class SunGodAuraFeatureRenderer extends FeatureRenderer<PlayerEntityRende
 
     @Override
     public void render(MatrixStack matrices, VertexConsumerProvider vertexConsumers, int light, PlayerEntityRenderState state, float limbAngle, float limbDistance) {
-        if (state.invisible) {
+        if (state.invisible || !ToggleSunGodSpell.active) {
             return;
         }
 

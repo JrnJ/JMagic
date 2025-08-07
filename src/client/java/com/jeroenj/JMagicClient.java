@@ -9,6 +9,7 @@ import com.jeroenj.entity.kitsune.KitsuneEntityRenderer;
 import com.jeroenj.hud.SpellHud;
 import com.jeroenj.hud.SpellSelectHud;
 import com.jeroenj.item.JMagicItems;
+import com.jeroenj.jparticle.JParticleEffects;
 import com.jeroenj.networking.payload.PlayerSpellsPayload;
 import com.jeroenj.networking.persistant.InitialSyncPayload;
 import com.jeroenj.networking.persistant.JMagicDirtPayload;
@@ -51,6 +52,7 @@ public class JMagicClient implements ClientModInitializer {
 		mc = MinecraftClient.getInstance();
 
 		JMagicModelLayers.initialize();
+		JParticleEffects.initialize();
 		// https://github.com/Nic4Las/Minecraft-Enderite-Mod/tree/Fabric-1.20
 //		SpecialModelTypes.ID_MAPPER.put(JMagic.id("magic_wand"), new MagicWandItemRenderer());
 
