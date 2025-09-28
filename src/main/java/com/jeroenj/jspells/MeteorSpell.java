@@ -26,7 +26,7 @@ public class MeteorSpell extends JSpell {
     }
 
     @Override
-    protected void performCast(ServerWorld world, ServerPlayerEntity user) {
+    protected void serverCast(ServerWorld world, ServerPlayerEntity user) {
         double ADDED_HEIGHT = 15.0;
         double METEOR_SPEED = 0.5;
 

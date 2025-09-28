@@ -16,7 +16,7 @@ public class SunGodGiantSpell extends JSpell {
     }
 
     @Override
-    protected void performCast(ServerWorld world, ServerPlayerEntity user) {
+    protected void serverCast(ServerWorld world, ServerPlayerEntity user) {
         // /attribute Player43 minecraft:block_interaction_range base set 8.5
         active = !active;
         if (active) {

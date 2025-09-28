@@ -6,13 +6,17 @@ import com.jeroenj.jpassives.JMagicPassive;
 import com.jeroenj.networking.payload.CastSpellData;
 import com.jeroenj.networking.payload.CastSpellPayload;
 import com.jeroenj.networking.payload.UsedSpellPayload;
+import net.fabricmc.api.EnvType;
+import net.fabricmc.api.Environment;
 import net.fabricmc.fabric.api.client.networking.v1.ClientPlayNetworking;
+import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.util.Identifier;
 
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
+@Environment(EnvType.CLIENT)
 public class JClientSpellManager implements ClientSpellCaster {
     private JSpell selectedSpell;
     private final List<JSpell> spells = Arrays.asList(new JSpell[JSpellManager.SPELL_COUNT]);
@@ -49,14 +53,30 @@ public class JClientSpellManager implements ClientSpellCaster {
         selectedSpell = spell;
     }
 
-    public void castSpell() {
+    public JSpellCastResult castSpell(PlayerEntity caster) {
         if (selectedSpell != null) {
-            ClientPlayNetworking.send(new CastSpellPayload(new CastSpellData(selectedSpell.getId())));
+            return castSpell(selectedSpell, caster);
         }
+
+        return JSpellCastResult.ERROR;
     }
 
-    public void castSpell(int index) {
-        ClientPlayNetworking.send(new CastSpellPayload(new CastSpellData(getSpell(index).getId())));
+    public JSpellCastResult castSpell(int index, PlayerEntity caster) {
+        return castSpell(getSpell(index), caster);
+    }
+
+    public JSpellCastResult castSpell(JSpell spell, PlayerEntity caster) {
+        // Client-Side check
+        // Server will do the same check too, and if it fails will call rejected
+        JSpellCastResult canCast = spell.canCast(caster);
+        if (canCast != JSpellCastResult.SUCCESS) {
+            return canCast; // TODO enable cooldown again
+        }
+
+        spell.clientCast(caster.getWorld(), caster); // client-cast
+        ClientPlayNetworking.send(new CastSpellPayload(new CastSpellData(spell.getId()))); // server-cast
+
+        return JSpellCastResult.SUCCESS;
     }
 
     public JSpell getSelectedSpell() {

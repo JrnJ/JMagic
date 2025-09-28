@@ -13,7 +13,7 @@ public class ManaBoltSpell extends JSpell {
     }
 
     @Override
-    protected void performCast(ServerWorld world, ServerPlayerEntity user) {
+    protected void serverCast(ServerWorld world, ServerPlayerEntity user) {
         ManaBoltEntity manaBolt = new ManaBoltEntity(JMagicEntities.MANA_BOLT, world);
         manaBolt.start(user.getPos(), new Vec3d(1.0, 0.0, 0.0), user.getYaw(), user.getPitch());
         world.spawnEntity(manaBolt);

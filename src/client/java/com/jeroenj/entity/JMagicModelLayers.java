@@ -2,6 +2,7 @@ package com.jeroenj.entity;
 
 import com.jeroenj.JMagic;
 import com.jeroenj.entity.kitsune.KitsuneEntityModel;
+import com.jeroenj.model.DawnRocketEntityModel;
 import com.jeroenj.model.KitsuneTailEntityModel;
 import com.jeroenj.model.SunGodAuraEntityModel;
 import net.fabricmc.api.EnvType;
@@ -17,7 +18,10 @@ public final class JMagicModelLayers {
 
     //
     public static final EntityModelLayer KITSUNE_TAIL = new EntityModelLayer(JMagic.id("kitsune_tail"), "main");
+
+    //
     public static final EntityModelLayer SUN_GOD_AURA = new EntityModelLayer(JMagic.id("sun_god_aura"), "main");
+    public static final EntityModelLayer DAWN_ROCKET = new EntityModelLayer(JMagic.id("dawn_rocket"), "main");
 
     public static void initialize() {
         EntityModelLayerRegistry.registerModelLayer(METEOR, MeteorEntityModel::getTexturedModelData);
@@ -25,6 +29,8 @@ public final class JMagicModelLayers {
         EntityModelLayerRegistry.registerModelLayer(KITSUNE, KitsuneEntityModel::getTexturedModelData);
 
         EntityModelLayerRegistry.registerModelLayer(KITSUNE_TAIL, KitsuneTailEntityModel::getTexturedModelData);
+
         EntityModelLayerRegistry.registerModelLayer(SUN_GOD_AURA, SunGodAuraEntityModel::getTexturedModelData);
+        EntityModelLayerRegistry.registerModelLayer(DAWN_ROCKET, DawnRocketEntityModel::getTexturedModelData);
     }
 }

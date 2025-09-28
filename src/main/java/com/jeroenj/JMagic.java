@@ -107,9 +107,10 @@ public class JMagic implements ModInitializer {
 										JMagicJSpells.TELEPORT_SPELL,
 										JMagicJSpells.LEAP_SPELL,
 										JMagicJSpells.MANA_BOLT_SPELL,
-										JMagicJSpells.SHRINK_SPELL,
-										JMagicJSpells.GROW_SPELL,
+//										JMagicJSpells.SHRINK_SPELL,
+//										JMagicJSpells.GROW_SPELL,
 										JMagicJSpells.TOGGLE_SUN_GOD_SPELL,
+										JMagicJSpells.DAWN_ROCKET_SPELL,
 										JMagicJSpells.SUN_GOD_GIANT_SPELL
 								)
 						)

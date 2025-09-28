@@ -21,7 +21,7 @@ public class TeleportSpell extends JSpell {
     }
 
     @Override
-    protected void performCast(ServerWorld world, ServerPlayerEntity user) {
+    protected void serverCast(ServerWorld world, ServerPlayerEntity user) {
         Vec3d lookingAtPos = JSpellClientHelper.getLookingAt(user, MAX_DISTANCE, true);
 
         if (world instanceof ServerWorld serverWorld) {

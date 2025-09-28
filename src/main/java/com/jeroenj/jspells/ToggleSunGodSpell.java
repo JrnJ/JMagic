@@ -16,7 +16,7 @@ public class ToggleSunGodSpell extends JSpell {
     }
 
     @Override
-    protected void performCast(ServerWorld world, ServerPlayerEntity user) {
+    protected void serverCast(ServerWorld world, ServerPlayerEntity user) {
         active = !active;
         if (active) {
             enable(user);

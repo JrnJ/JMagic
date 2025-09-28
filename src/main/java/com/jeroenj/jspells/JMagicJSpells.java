@@ -1,6 +1,7 @@
 package com.jeroenj.jspells;
 
 import com.jeroenj.JMagic;
+import com.jeroenj.jspells.SunGod.DawnRocketSpell;
 import net.minecraft.util.Identifier;
 
 public final class JMagicJSpells {
@@ -13,6 +14,7 @@ public final class JMagicJSpells {
 
     public static final Identifier TOGGLE_SUN_GOD_SPELL = JMagic.id("toggle_sun_god");
     public static final Identifier SUN_GOD_GIANT_SPELL = JMagic.id("sun_god_giant");
+    public static final Identifier DAWN_ROCKET_SPELL = JMagic.id("dawn_rocket");
 
     public static void initialize() {
         JSpellRegistry.register(METEOR_SPELL, MeteorSpell::new);
@@ -23,6 +25,8 @@ public final class JMagicJSpells {
         JSpellRegistry.register(GROW_SPELL, GrowSpell::new);
 
         JSpellRegistry.register(TOGGLE_SUN_GOD_SPELL, ToggleSunGodSpell::new);
+
         JSpellRegistry.register(SUN_GOD_GIANT_SPELL, SunGodGiantSpell::new);
+        JSpellRegistry.register(DAWN_ROCKET_SPELL, DawnRocketSpell::new);
     }
 }

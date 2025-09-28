@@ -5,4 +5,5 @@ public enum JSpellCastResult
     ON_COOLDOWN,
     NO_MANA,
     SUCCESS,
+    ERROR
 }

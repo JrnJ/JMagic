@@ -10,7 +10,7 @@ public class GrowSpell extends SizeChangeSpell {
     }
 
     @Override
-    protected void performCast(ServerWorld world, ServerPlayerEntity user) {
+    protected void serverCast(ServerWorld world, ServerPlayerEntity user) {
         if (user.isSneaking()) {
             increaseSize(user, 1);
         } else {

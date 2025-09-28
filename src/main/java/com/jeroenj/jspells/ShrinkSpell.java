@@ -10,7 +10,7 @@ public class ShrinkSpell extends SizeChangeSpell {
     }
 
     @Override
-    protected void performCast(ServerWorld world, ServerPlayerEntity user) {
+    protected void serverCast(ServerWorld world, ServerPlayerEntity user) {
         if (user.isSneaking()) {
             decreaseSize(user, 1);
         } else {

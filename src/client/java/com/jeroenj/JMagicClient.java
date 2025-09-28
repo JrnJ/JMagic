@@ -15,16 +15,12 @@ import com.jeroenj.item.InspectableItem;
 import com.jeroenj.item.JMagicItems;
 import com.jeroenj.item.ReloadableItem;
 import com.jeroenj.jparticle.JParticleEffects;
-import com.jeroenj.networking.JMagicPackets;
 import com.jeroenj.networking.payload.*;
 import com.jeroenj.networking.persistant.InitialSyncPayload;
 import com.jeroenj.networking.persistant.JMagicDirtPayload;
 import com.jeroenj.networking.persistant.JMagicPlayerData;
 import com.jeroenj.networking.persistant.LEntry;
 import com.jeroenj.particles.JMagicParticles;
-import com.jeroenj.sound.JMagicSounds;
-import com.jeroenj.util.JClientHelper;
-import com.jeroenj.util.JHelper;
 import net.fabricmc.api.ClientModInitializer;
 import net.fabricmc.api.EnvType;
 import net.fabricmc.api.Environment;
@@ -35,15 +31,12 @@ import net.fabricmc.fabric.api.client.networking.v1.ClientPlayNetworking;
 import net.fabricmc.fabric.api.client.particle.v1.ParticleFactoryRegistry;
 import net.fabricmc.fabric.api.client.rendering.v1.EntityRendererRegistry;
 import net.fabricmc.fabric.api.client.rendering.v1.HudRenderCallback;
-import net.fabricmc.fabric.api.event.player.AttackBlockCallback;
-import net.fabricmc.fabric.api.event.player.AttackEntityCallback;
 import net.minecraft.client.MinecraftClient;
 import net.minecraft.client.option.KeyBinding;
 import net.minecraft.client.particle.EndRodParticle;
 import net.minecraft.client.render.RenderLayer;
 import net.minecraft.client.util.InputUtil;
 import net.minecraft.text.Text;
-import net.minecraft.util.ActionResult;
 import net.minecraft.util.Hand;
 import net.minecraft.util.hit.HitResult;
 import org.lwjgl.glfw.GLFW;
@@ -227,19 +220,19 @@ public class JMagicClient implements ClientModInitializer {
 
 				// Quick Cast
 				while (quickCast1.wasPressed() && canCastSpell()) {
-					((ClientPlayerEntityAccess) mc.player).jMagic$getClientSpellManager().castSpell(0);
+					((ClientPlayerEntityAccess) mc.player).jMagic$getClientSpellManager().castSpell(0, mc.player);
 				}
 
 				while (quickCast2.wasPressed() && canCastSpell()) {
-					((ClientPlayerEntityAccess) mc.player).jMagic$getClientSpellManager().castSpell(1);
+					((ClientPlayerEntityAccess) mc.player).jMagic$getClientSpellManager().castSpell(1, mc.player);
 				}
 
 				while (quickCast3.wasPressed() && canCastSpell()) {
-					((ClientPlayerEntityAccess) mc.player).jMagic$getClientSpellManager().castSpell(2);
+					((ClientPlayerEntityAccess) mc.player).jMagic$getClientSpellManager().castSpell(2, mc.player);
 				}
 
 				while (quickCast4.wasPressed() && canCastSpell()) {
-					((ClientPlayerEntityAccess) mc.player).jMagic$getClientSpellManager().castSpell(3);
+					((ClientPlayerEntityAccess) mc.player).jMagic$getClientSpellManager().castSpell(3, mc.player);
 				}
 
 				// Other

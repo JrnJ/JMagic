@@ -26,9 +26,13 @@ public class MagicWand extends Item {
     }
 
     @Override
-    public ActionResult use(World world, PlayerEntity user, Hand hand) {
+    public ActionResult use(World world, PlayerEntity caster, Hand hand) {
         if (world.isClient()) {
-            clientSpellCaster.castSpell();
+            if (clientSpellCaster.castSpell(caster) != JSpellCastResult.SUCCESS) {
+                return ActionResult.FAIL;
+            } else {
+                return ActionResult.SUCCESS;
+            }
         }
 
         return ActionResult.SUCCESS;

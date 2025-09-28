@@ -20,7 +20,7 @@ public class LeapSpell extends JSpell {
     }
 
     @Override
-    protected void performCast(ServerWorld world, ServerPlayerEntity user) {
+    protected void serverCast(ServerWorld world, ServerPlayerEntity user) {
         Vec3d lookDirection = user.getRotationVec(1.0F);
 
         Vec3d leapVelocity = new Vec3d(

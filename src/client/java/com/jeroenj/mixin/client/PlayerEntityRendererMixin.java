@@ -1,5 +1,6 @@
 package com.jeroenj.mixin.client;
 
+import com.jeroenj.featurerender.DawnRocketFeatureRenderer;
 import com.jeroenj.featurerender.KitsuneTailFeatureRenderer;
 import com.jeroenj.featurerender.SunGodAuraFeatureRenderer;
 import com.jeroenj.rendering.CustomFeatureRenderer;
@@ -26,5 +27,6 @@ public abstract class PlayerEntityRendererMixin extends LivingEntityRenderer<Abs
 //        this.addFeature(new CustomFeatureRenderer(this));
 //        this.addFeature(new KitsuneTailFeatureRenderer(this, ctx.getEntityModels()));
         this.addFeature(new SunGodAuraFeatureRenderer(this, ctx.getEntityModels()));
+        this.addFeature(new DawnRocketFeatureRenderer(this, ctx.getEntityModels()));
     }
 }

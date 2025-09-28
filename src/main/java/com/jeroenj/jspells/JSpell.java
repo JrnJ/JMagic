@@ -1,23 +1,15 @@
 package com.jeroenj.jspells;
 
-import com.jeroenj.access.ServerPlayerEntityAccess;
 import com.jeroenj.attachments.JMagicAttachmentTypes;
 import com.jeroenj.attachments.JMagicManaAttachment;
-import com.jeroenj.networking.payload.CastSpellPayload;
 import com.jeroenj.networking.payload.UsedSpellData;
 import com.jeroenj.networking.payload.UsedSpellPayload;
-import com.mojang.serialization.Codec;
-import io.netty.buffer.ByteBuf;
 import net.fabricmc.fabric.api.networking.v1.ServerPlayNetworking;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.player.PlayerEntity;
-import net.minecraft.network.codec.PacketCodec;
 import net.minecraft.server.network.ServerPlayerEntity;
 import net.minecraft.server.world.ServerWorld;
-import net.minecraft.sound.SoundCategory;
-import net.minecraft.sound.SoundEvents;
 import net.minecraft.util.Identifier;
-import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
 
 public abstract class JSpell {
@@ -42,18 +34,28 @@ public abstract class JSpell {
         this.slotTexture = slotTexture;
     }
 
-    public final JSpellCastResult cast(ServerWorld world, ServerPlayerEntity user) {
+    public JSpellCastResult canCast(PlayerEntity user) {
         if (cooldownTimer > 0) {
-//            return JSpellCastResult.ON_COOLDOWN;
+            return JSpellCastResult.ON_COOLDOWN;
         }
         int currentMana = user.getAttachedOrCreate(JMagicAttachmentTypes.PLAYER_MANA).getCurrentMana();
         if (manaCost > currentMana) {
-//            return JSpellCastResult.NO_MANA;
+            return JSpellCastResult.NO_MANA;
+        }
+
+        return JSpellCastResult.SUCCESS;
+    }
+
+    public final JSpellCastResult cast(ServerWorld world, ServerPlayerEntity user) {
+        JSpellCastResult canCast = canCast(user);
+        if (canCast != JSpellCastResult.SUCCESS) {
+            return canCast; // TODO enable cooldown again
         }
 
         cooldownTimer = cooldown;
+        int currentMana = user.getAttachedOrCreate(JMagicAttachmentTypes.PLAYER_MANA).getCurrentMana();
         user.setAttached(JMagicAttachmentTypes.PLAYER_MANA, new JMagicManaAttachment(currentMana - manaCost));
-        performCast(world, user);
+        serverCast(world, user);
 
         // TODO change atTick(0)
         world.getServer().execute(() -> {
@@ -63,7 +65,11 @@ public abstract class JSpell {
         return JSpellCastResult.SUCCESS;
     }
 
-    protected abstract void performCast(ServerWorld world, ServerPlayerEntity user);
+    protected abstract void serverCast(ServerWorld world, ServerPlayerEntity user);
+    protected void clientCast(World world, PlayerEntity user) // TODO MAKE ABSTRACT
+    {
+
+    }
 
     public String spellSelectInfo(PlayerEntity user) {
         return "";
