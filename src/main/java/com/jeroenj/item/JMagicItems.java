@@ -2,15 +2,19 @@ package com.jeroenj.item;
 
 import com.jeroenj.JMagic;
 import com.jeroenj.armor.JMagicArmorMaterials;
+import com.jeroenj.block.JMagicBlocks;
 import com.jeroenj.entity.JMagicEntities;
 import com.jeroenj.item.MagicWand;
 import net.minecraft.component.DataComponentTypes;
 import net.minecraft.component.type.EquippableComponent;
+import net.minecraft.component.type.FoodComponent;
 import net.minecraft.component.type.UnbreakableComponent;
 import net.minecraft.entity.EquipmentSlot;
 import net.minecraft.item.*;
 import net.minecraft.item.equipment.ArmorMaterials;
 import net.minecraft.item.equipment.EquipmentType;
+import net.minecraft.registry.Registries;
+import net.minecraft.registry.Registry;
 import net.minecraft.registry.RegistryKey;
 import net.minecraft.registry.RegistryKeys;
 import net.minecraft.sound.SoundEvents;
@@ -50,9 +54,53 @@ public final class JMagicItems {
             .component(DataComponentTypes.MAX_STACK_SIZE, 16)
     );
 
+    // Guns
+    public static final Item EVORI_GUN = register("evori_gun", EvoriGunItem::new, new Item.Settings()
+            .component(DataComponentTypes.UNBREAKABLE, new UnbreakableComponent(true))
+            .component(DataComponentTypes.MAX_STACK_SIZE, 1)
+    );
+
     // Fruits
     public static final Item GOMU_GOMU_NO_MI = register("gomu_gomu_no_mi", DevilFruitItem::new, new Item.Settings()
+            .food(new FoodComponent.Builder()
+                    .alwaysEdible()
+                    .build())
             .component(DataComponentTypes.MAX_STACK_SIZE, 1)
+    );
+
+    // Mochi
+    public static final Item GLUTINOUS_RICE_SEEDS = register("glutinous_rice_seeds",
+            settings -> new BlockItem(JMagicBlocks.GLUTINOUS_RICE_CROP_BLOCK, settings), new Item.Settings().useItemPrefixedTranslationKey());
+
+    public static final Item GLUTINOUS_RICE = register("glutinous_rice", Item::new, new Item.Settings());
+    public static final Item MOCHI_MIXTURE = register("mochi_mixture", Item::new, new Item.Settings());
+
+    public static final int MOCHI_HUNGER = 6;
+    public static final Item MOCHI_ITEM = register("mochi", Item::new, new Item.Settings()
+            .food(new FoodComponent.Builder()
+                    .nutrition(MOCHI_HUNGER)
+                    .build())
+    );
+    public static final Item GREEN_TEA_MOCHI_ITEM = register("green_tea_mochi", Item::new, new Item.Settings()
+            .food(new FoodComponent.Builder()
+                    .nutrition(MOCHI_HUNGER)
+                    .build())
+    );
+    public static final Item STRAWBERRY_MOCHI_ITEM = register("strawberry_mochi", Item::new, new Item.Settings()
+            .food(new FoodComponent.Builder()
+                    .nutrition(MOCHI_HUNGER)
+                    .build())
+    );
+    public static final Item CHOCOLATE_MOCHI_ITEM = register("chocolate_mochi", Item::new, new Item.Settings()
+            .food(new FoodComponent.Builder()
+                    .nutrition(MOCHI_HUNGER)
+                    .build())
+    );
+
+    public static final Item STRAWBERRY_ITEM = register("strawberry", Item::new, new Item.Settings()
+            .food(new FoodComponent.Builder()
+                    .nutrition(MOCHI_HUNGER)
+                    .build())
     );
 
     // Methods

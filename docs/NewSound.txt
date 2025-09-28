@@ -1,0 +1,10 @@
+# Code
+- in main/.../sound/JMagicSounds add your sound
+- in client/.../datagen/translation add your sound translations
+- Run DataGen project
+
+# Resources
+- in client/resources/sounds/... add your sounds as .ogg file (export via Audacity)
+
+# Use
+- play it with: JHelper.playServerSound(player, JMagicSounds.<SOUND>, SoundCategory.<CATEGORY>, 1.0f, 1.0f);

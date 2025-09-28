@@ -1,0 +1,37 @@
+# Modeling
+Mage Armor
+Spell Wand
+
+# Spells
+Teleport velocity on exit
+Meteor spell working again
+
+# Features
+## Skills
+- Extra Mana
+- Extra Spell Damage
+### Skill Viewer
+- (+/-) button for each skill
+- save skill levels to player data
+
+## Spell Selecting/Changing (Not the wheel)
+- UI to change a spell for every slot
+
+## Spell Saving (SaveStateLoad)
+- Save unlocked and selected spells
+
+# Extra
+## Inventory Tabs
+-Inventory
+-Spell change view
+-Skill view
+
+# Todo
+- Create a structure (kitsune shrine) and have it spawn in the magical forest
+- Make a Kitsune mob and have it spawn in the magical forest
+
+## Custom Rendering
+- Spawn a texture
+- Spawn a ring texture with custom object
+
+

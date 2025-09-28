@@ -1,0 +1,30 @@
+{
+  "parent": "jmagic:root",
+  "criteria": {
+    "got_mochi": {
+      "conditions": {
+        "items": [
+          {
+            "items": "jmagic:mochi"
+          }
+        ]
+      },
+      "trigger": "minecraft:inventory_changed"
+    }
+  },
+  "display": {
+    "background": "minecraft:textures/gui/advancements/backgrounds/adventure.png",
+    "description": "Don't eat it just yet!",
+    "icon": {
+      "count": 1,
+      "id": "jmagic:mochi"
+    },
+    "title": "Your first Mochi"
+  },
+  "requirements": [
+    [
+      "got_mochi"
+    ]
+  ],
+  "sends_telemetry_event": true
+}

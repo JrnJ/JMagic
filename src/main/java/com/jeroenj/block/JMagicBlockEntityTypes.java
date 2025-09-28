@@ -12,6 +12,11 @@ public final class JMagicBlockEntityTypes {
             FabricBlockEntityTypeBuilder.create(MageTableBlockEntity::new, JMagicBlocks.MAGE_TABLE_BLOCK).build()
     );
 
+    public static final BlockEntityType<GlutinousRiceSoakerBlockEntity> GLUTINOUS_RICE_SOAKER_BLOCK = register(
+            "glutinous_rice_soaker",
+            FabricBlockEntityTypeBuilder.create(GlutinousRiceSoakerBlockEntity::new, JMagicBlocks.GLUTINOUS_RICE_SOAKER_BLOCK).build()
+    );
+
     public static <T extends BlockEntityType<?>> T register(String path, T blockEntityType) {
         return Registry.register(Registries.BLOCK_ENTITY_TYPE, JMagic.id(path), blockEntityType);
     }
