@@ -1,0 +1,6 @@
+{
+  "parent": "minecraft:block/crop",
+  "textures": {
+    "crop": "jmagic:block/glutinous_rice_stage4"
+  }
+}

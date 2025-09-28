@@ -17,6 +17,9 @@ public final class JMagicPackets {
     public static final Identifier USED_SPELL_ID = JMagic.id("used_spell");
     public static final Identifier SPELL_CHANGED_ID = JMagic.id("spell_changed");
 
+    // Gun
+    public static final Identifier GUN_SHOOT_ID = JMagic.id("gun_shoot");
+
     public static void initialize() {
 
     }

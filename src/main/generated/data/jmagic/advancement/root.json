@@ -1,0 +1,29 @@
+{
+  "criteria": {
+    "got_glutinous_rice_seeds": {
+      "conditions": {
+        "items": [
+          {
+            "items": "jmagic:glutinous_rice_seeds"
+          }
+        ]
+      },
+      "trigger": "minecraft:inventory_changed"
+    }
+  },
+  "display": {
+    "background": "minecraft:textures/gui/advancements/backgrounds/adventure.png",
+    "description": "The magical farming begins!",
+    "icon": {
+      "count": 1,
+      "id": "jmagic:mochi"
+    },
+    "title": "JMagic"
+  },
+  "requirements": [
+    [
+      "got_glutinous_rice_seeds"
+    ]
+  ],
+  "sends_telemetry_event": true
+}

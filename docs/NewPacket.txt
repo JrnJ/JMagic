@@ -1,0 +1,8 @@
+# Code
+- in main/.../networking/JMagicPackets add the id
+- in main/.../networking/payload add your packets Payload and Data
+- in main/.../JMagic in registerNetworking add your callback or listener
+- in client/.../JMagicClient in registerNetworking add your callback or listener
+
+# Usage
+- ClientPlayNetworking.send(new <Package>Payload(new <Package>Data(args...)));

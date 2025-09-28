@@ -64,6 +64,10 @@ public final class JHelper {
         world.playSound(null, player.getX(), player.getY(), player.getZ(), sound, category, volume, pitch);
     }
 
+    public static void playClientSound(Entity entity, SoundEvent sound, float volume, float pitch) {
+        entity.playSound(sound, volume, pitch);
+    }
+
     // Private Helpers
     private static boolean isClient(World world) {
         if (world.isClient()) {

@@ -10,5 +10,29 @@
         "sounds": [
             "jmagic:ground_impact"
         ]
+    },
+    "evori_inspect": {
+        "subtitle": "sound.jmagic.evori_inspect",
+        "sounds": [
+            "jmagic:evori_inspect"
+        ]
+    },
+    "evori_reload": {
+        "subtitle": "sound.jmagic.evori_reload",
+        "sounds": [
+            "jmagic:evori_reload"
+        ]
+    },
+    "evori_select": {
+        "subtitle": "sound.jmagic.evori_select",
+        "sounds": [
+            "jmagic:evori_select"
+        ]
+    },
+    "evori_shoot": {
+        "subtitle": "sound.jmagic.evori_shoot",
+        "sounds": [
+            "jmagic:evori_shoot"
+        ]
     }
 }

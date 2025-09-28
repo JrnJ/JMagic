@@ -1,6 +1,8 @@
 package com.jeroenj;
 
+import com.jeroenj.datagen.JMagicAdvancementProvider;
 import com.jeroenj.datagen.JMagicModelGenerator;
+import com.jeroenj.datagen.JMagicRecipeProvider;
 import com.jeroenj.datagen.JMagicWorldGenerator;
 import com.jeroenj.datagen.translation.JMagicEnUsLangProvider;
 import com.jeroenj.world.biome.JMagicBiomes;
@@ -16,6 +18,8 @@ public class JMagicDataGenerator implements DataGeneratorEntrypoint {
 		pack.addProvider(JMagicModelGenerator::new);
 		pack.addProvider(JMagicEnUsLangProvider::new);
 		pack.addProvider(JMagicWorldGenerator::new);
+		pack.addProvider(JMagicRecipeProvider::new);
+		pack.addProvider(JMagicAdvancementProvider::new);
 	}
 
 	@Override

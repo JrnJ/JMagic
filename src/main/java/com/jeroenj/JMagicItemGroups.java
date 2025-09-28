@@ -25,6 +25,19 @@ public final class JMagicItemGroups {
                 // Fruits
                 entries.add(JMagicItems.GOMU_GOMU_NO_MI);
 
+                // Guns
+                entries.add(JMagicItems.EVORI_GUN);
+
+                // Mochi
+                entries.add(JMagicItems.STRAWBERRY_ITEM);
+                entries.add(JMagicItems.GLUTINOUS_RICE_SEEDS);
+                entries.add(JMagicItems.GLUTINOUS_RICE);
+                entries.add(JMagicItems.MOCHI_MIXTURE);
+                entries.add(JMagicItems.MOCHI_ITEM);
+                entries.add(JMagicItems.GREEN_TEA_MOCHI_ITEM);
+                entries.add(JMagicItems.STRAWBERRY_MOCHI_ITEM);
+                entries.add(JMagicItems.CHOCOLATE_MOCHI_ITEM);
+
                 // All Scrolls at the end
                 entries.add(JMagicItems.SPELL_SCROLL);
                 entries.add(JMagicItems.FIREBALL_SPELL_SCROLL);

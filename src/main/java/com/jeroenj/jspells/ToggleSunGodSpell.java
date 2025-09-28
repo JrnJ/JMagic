@@ -30,7 +30,7 @@ public class ToggleSunGodSpell extends JSpell {
         user.addStatusEffect(new StatusEffectInstance(StatusEffects.SPEED, -1, 3, false, false, false));
         EntityAttributeInstance stepHeightAttribute = user.getAttributeInstance(EntityAttributes.STEP_HEIGHT);
         if (stepHeightAttribute != null) {
-            stepHeightAttribute.setBaseValue(1.0f);
+            stepHeightAttribute.setBaseValue(1.1f);
         }
     }
 

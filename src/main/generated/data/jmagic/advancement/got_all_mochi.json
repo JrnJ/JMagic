@@ -1,0 +1,40 @@
+{
+  "parent": "jmagic:got_mochi",
+  "criteria": {
+    "got_all_mochi": {
+      "conditions": {
+        "items": [
+          {
+            "items": "jmagic:mochi"
+          },
+          {
+            "items": "jmagic:chocolate_mochi"
+          },
+          {
+            "items": "jmagic:strawberry_mochi"
+          },
+          {
+            "items": "jmagic:green_tea_mochi"
+          }
+        ]
+      },
+      "trigger": "minecraft:inventory_changed"
+    }
+  },
+  "display": {
+    "background": "minecraft:textures/gui/advancements/backgrounds/adventure.png",
+    "description": "You crafted every Mochi!",
+    "frame": "challenge",
+    "icon": {
+      "count": 1,
+      "id": "jmagic:green_tea_mochi"
+    },
+    "title": "All the Mochi"
+  },
+  "requirements": [
+    [
+      "got_all_mochi"
+    ]
+  ],
+  "sends_telemetry_event": true
+}

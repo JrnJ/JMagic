@@ -7,19 +7,19 @@ import com.jeroenj.block.JMagicBlockEntityTypes;
 import com.jeroenj.block.JMagicBlocks;
 import com.jeroenj.effect.JMagicEffects;
 import com.jeroenj.entity.JMagicEntities;
+import com.jeroenj.item.GunItem;
 import com.jeroenj.item.JMagicItems;
 import com.jeroenj.jspells.JMagicJSpells;
 import com.jeroenj.networking.JMagicPackets;
-import com.jeroenj.networking.payload.CastSpellPayload;
-import com.jeroenj.networking.payload.PlayerSpellsData;
-import com.jeroenj.networking.payload.PlayerSpellsPayload;
-import com.jeroenj.networking.payload.UsedSpellPayload;
+import com.jeroenj.networking.payload.*;
 import com.jeroenj.networking.persistant.*;
 import com.jeroenj.particles.JMagicParticles;
 import com.jeroenj.potion.JMagicPotions;
 import com.jeroenj.sound.JMagicSounds;
 import net.fabricmc.api.ModInitializer;
 
+import net.fabricmc.fabric.api.event.player.AttackBlockCallback;
+import net.fabricmc.fabric.api.event.player.AttackEntityCallback;
 import net.fabricmc.fabric.api.event.player.PlayerBlockBreakEvents;
 import net.fabricmc.fabric.api.networking.v1.PayloadTypeRegistry;
 import net.fabricmc.fabric.api.networking.v1.ServerPlayConnectionEvents;
@@ -30,6 +30,8 @@ import net.minecraft.server.MinecraftServer;
 import net.minecraft.server.network.ServerPlayerEntity;
 import net.minecraft.text.MutableText;
 import net.minecraft.text.Text;
+import net.minecraft.util.ActionResult;
+import net.minecraft.util.Hand;
 import net.minecraft.util.Identifier;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -62,6 +64,13 @@ public class JMagic implements ModInitializer {
 		JMagicPackets.initialize();
 		JMagicArmorMaterials.initialize();
 
+		// Registering
+		registerNetworking();
+		registerOther();
+	}
+
+	private void registerNetworking() {
+		// Networking
 //		PayloadTypeRegistry.playS2C().register(JMagicTestPayload.ID, JMagicTestPayload.CODEC);
 		PayloadTypeRegistry.playS2C().register(JMagicDirtPayload.ID, JMagicDirtPayload.CODEC);
 		PayloadTypeRegistry.playS2C().register(InitialSyncPayload.ID, InitialSyncPayload.CODEC);
@@ -74,6 +83,16 @@ public class JMagic implements ModInitializer {
 			context.server().execute(() -> {
 				((ServerPlayerEntityAccess) context.player()).jMagic$getSpellManager().cast(
 						context.player().getServerWorld(), context.player(), payload.data().identifier());
+			});
+		});
+
+		// Guns
+		PayloadTypeRegistry.playC2S().register(GunShootPayload.ID, GunShootPayload.PACKET_CODEC);
+		ServerPlayNetworking.registerGlobalReceiver(GunShootPayload.ID, (payload, context) -> {
+			context.server().execute(() -> {
+				if (context.player().getMainHandStack().getItem() instanceof GunItem gunItem) {
+					gunItem.shoot(context.player());
+				}
 			});
 		});
 
@@ -132,6 +151,30 @@ public class JMagic implements ModInitializer {
 									))));
 				});
 			}
+		});
+	}
+
+	private void registerOther() {
+		AttackBlockCallback.EVENT.register((player, world, hand, pos, direction) -> {
+			if (!world.isClient() && hand == Hand.MAIN_HAND) {
+				if (player.getStackInHand(hand).getItem() instanceof GunItem gunItem) {
+					gunItem.shoot(player);
+					return ActionResult.FAIL;
+				}
+			}
+
+			return ActionResult.PASS;
+		});
+
+		AttackEntityCallback.EVENT.register((player, world, hand, entity, hitResult) -> {
+			if (!world.isClient() && hand == Hand.MAIN_HAND) {
+				if (player.getStackInHand(hand).getItem() instanceof GunItem gunItem) {
+					gunItem.shoot(player);
+					return ActionResult.FAIL;
+				}
+			}
+
+			return ActionResult.PASS;
 		});
 	}
 

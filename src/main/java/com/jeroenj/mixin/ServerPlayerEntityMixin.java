@@ -5,6 +5,7 @@ import com.jeroenj.access.ServerPlayerEntityAccess;
 import com.jeroenj.jspells.JMagicJSpells;
 import com.jeroenj.jspells.JSpellManager;
 import com.jeroenj.jspells.JSpellRegistry;
+import com.jeroenj.jspells.ToggleSunGodSpell;
 import com.jeroenj.sound.JMagicSounds;
 import com.jeroenj.util.JHelper;
 import net.minecraft.block.BlockState;
@@ -47,8 +48,10 @@ public class ServerPlayerEntityMixin implements ServerPlayerEntityAccess {
 
     @Inject(at = @At("HEAD"), method = "jump")
     private void jump(CallbackInfo ci) {
-        ServerPlayerEntity player = (ServerPlayerEntity)(Object)this;
-        JHelper.playServerSound(
-                player, JMagicSounds.CARTOON_BOING, SoundCategory.PLAYERS, 0.25f, 0.9f + (player.getServerWorld().getRandom().nextFloat() * 0.1f));
+        if (ToggleSunGodSpell.active) {
+            ServerPlayerEntity player = (ServerPlayerEntity)(Object)this;
+            JHelper.playServerSound(
+                    player, JMagicSounds.CARTOON_BOING, SoundCategory.PLAYERS, 0.25f, 0.9f + (player.getServerWorld().getRandom().nextFloat() * 0.1f));
+        }
     }
 }
