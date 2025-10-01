@@ -65,8 +65,8 @@ public abstract class JSpell {
         return JSpellCastResult.SUCCESS;
     }
 
-    protected abstract void serverCast(ServerWorld world, ServerPlayerEntity user);
-    protected void clientCast(World world, PlayerEntity user) // TODO MAKE ABSTRACT
+    protected abstract void serverCast(ServerWorld world, ServerPlayerEntity caster);
+    protected void clientCast(World world, PlayerEntity caster) // TODO MAKE ABSTRACT
     {
 
     }
@@ -79,7 +79,13 @@ public abstract class JSpell {
 
     }
 
-    public void tick() {
+    public void serverTick(ServerPlayerEntity caster) {
+        if (cooldownTimer > 0) {
+            cooldownTimer--;
+        }
+    }
+
+    public void clientTick(PlayerEntity caster) {
         if (cooldownTimer > 0) {
             cooldownTimer--;
         }

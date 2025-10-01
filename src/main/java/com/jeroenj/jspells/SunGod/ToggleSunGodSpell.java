@@ -1,6 +1,8 @@
-package com.jeroenj.jspells;
+package com.jeroenj.jspells.SunGod;
 
 import com.jeroenj.JMagic;
+import com.jeroenj.jspells.JMagicJSpells;
+import com.jeroenj.jspells.JSpell;
 import net.minecraft.entity.attribute.EntityAttributeInstance;
 import net.minecraft.entity.attribute.EntityAttributes;
 import net.minecraft.entity.effect.StatusEffectInstance;
@@ -26,8 +28,14 @@ public class ToggleSunGodSpell extends JSpell {
     }
 
     private void enable(ServerPlayerEntity user) {
-        user.addStatusEffect(new StatusEffectInstance(StatusEffects.JUMP_BOOST, -1, 2, false, false, false));
-        user.addStatusEffect(new StatusEffectInstance(StatusEffects.SPEED, -1, 3, false, false, false));
+        EntityAttributeInstance movementSpeedAttribute = user.getAttributeInstance(EntityAttributes.MOVEMENT_SPEED);
+        if (movementSpeedAttribute != null) {
+            movementSpeedAttribute.setBaseValue(0.18f);
+        }
+        EntityAttributeInstance jumpStrengthAttribute = user.getAttributeInstance(EntityAttributes.JUMP_STRENGTH);
+        if (jumpStrengthAttribute != null) {
+            jumpStrengthAttribute.setBaseValue(0.73f);
+        }
         EntityAttributeInstance stepHeightAttribute = user.getAttributeInstance(EntityAttributes.STEP_HEIGHT);
         if (stepHeightAttribute != null) {
             stepHeightAttribute.setBaseValue(1.1f);
@@ -35,8 +43,8 @@ public class ToggleSunGodSpell extends JSpell {
     }
 
     private void disable(ServerPlayerEntity user) {
-        user.removeStatusEffect(StatusEffects.JUMP_BOOST);
-        user.removeStatusEffect(StatusEffects.SPEED);
+        user.getAttributes().resetToBaseValue(EntityAttributes.MOVEMENT_SPEED);
+        user.getAttributes().resetToBaseValue(EntityAttributes.JUMP_STRENGTH);
         user.getAttributes().resetToBaseValue(EntityAttributes.STEP_HEIGHT);
     }
 }

@@ -1,8 +1,6 @@
 package com.jeroenj.jspells;
 
-import com.jeroenj.access.ClientPlayerEntityAccess;
 import com.jeroenj.access.ClientSpellCaster;
-import com.jeroenj.jpassives.JMagicPassive;
 import com.jeroenj.networking.payload.CastSpellData;
 import com.jeroenj.networking.payload.CastSpellPayload;
 import com.jeroenj.networking.payload.UsedSpellPayload;
@@ -10,9 +8,9 @@ import net.fabricmc.api.EnvType;
 import net.fabricmc.api.Environment;
 import net.fabricmc.fabric.api.client.networking.v1.ClientPlayNetworking;
 import net.minecraft.entity.player.PlayerEntity;
+import net.minecraft.server.network.ServerPlayerEntity;
 import net.minecraft.util.Identifier;
 
-import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
@@ -30,10 +28,10 @@ public class JClientSpellManager implements ClientSpellCaster {
         });
     }
 
-    public void tick() {
+    public void tick(PlayerEntity caster) {
         for (JSpell spell : spells) {
             if (spell == null) continue;
-            spell.tick();
+            spell.clientTick(caster);
         }
     }
 

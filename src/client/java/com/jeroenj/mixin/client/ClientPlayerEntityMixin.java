@@ -7,7 +7,6 @@ import com.jeroenj.jspells.JClientSpellManager;
 import net.fabricmc.api.EnvType;
 import net.fabricmc.api.Environment;
 import net.minecraft.client.network.ClientPlayerEntity;
-import net.minecraft.server.network.ServerPlayerEntity;
 import net.minecraft.util.Hand;
 import org.jetbrains.annotations.NotNull;
 import org.spongepowered.asm.mixin.Mixin;
@@ -38,7 +37,7 @@ public class ClientPlayerEntityMixin implements ClientPlayerEntityAccess {
 
     @Inject(at = @At("HEAD"), method = "tick")
     private void tick(CallbackInfo ci) {
-        spellManager.tick();
+        spellManager.tick(mc.player);
 //        spellManager.tick((ServerPlayerEntity) (Object) this);
     }
 

@@ -2,7 +2,7 @@ package com.jeroenj.featurerender;
 
 import com.jeroenj.JMagic;
 import com.jeroenj.entity.JMagicModelLayers;
-import com.jeroenj.jspells.ToggleSunGodSpell;
+import com.jeroenj.jspells.SunGod.ToggleSunGodSpell;
 import com.jeroenj.model.SunGodAuraEntityModel;
 import net.fabricmc.api.EnvType;
 import net.fabricmc.api.Environment;

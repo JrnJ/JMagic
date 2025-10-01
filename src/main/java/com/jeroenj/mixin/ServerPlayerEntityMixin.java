@@ -1,17 +1,14 @@
 package com.jeroenj.mixin;
 
-import com.jeroenj.JMagic;
 import com.jeroenj.access.ServerPlayerEntityAccess;
 import com.jeroenj.jspells.JMagicJSpells;
 import com.jeroenj.jspells.JSpellManager;
 import com.jeroenj.jspells.JSpellRegistry;
-import com.jeroenj.jspells.ToggleSunGodSpell;
+import com.jeroenj.jspells.SunGod.ToggleSunGodSpell;
 import com.jeroenj.sound.JMagicSounds;
 import com.jeroenj.util.JHelper;
-import net.minecraft.block.BlockState;
 import net.minecraft.server.network.ServerPlayerEntity;
 import net.minecraft.sound.SoundCategory;
-import net.minecraft.util.math.BlockPos;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.Unique;
 import org.spongepowered.asm.mixin.injection.At;
@@ -34,7 +31,8 @@ public class ServerPlayerEntityMixin implements ServerPlayerEntityAccess {
 //            JSpellRegistry.getSpell(JMagicJSpells.GROW_SPELL),
             JSpellRegistry.getSpell(JMagicJSpells.TOGGLE_SUN_GOD_SPELL),
             JSpellRegistry.getSpell(JMagicJSpells.DAWN_ROCKET_SPELL),
-            JSpellRegistry.getSpell(JMagicJSpells.SUN_GOD_GIANT_SPELL)
+            JSpellRegistry.getSpell(JMagicJSpells.SUN_GOD_GIANT_SPELL),
+            JSpellRegistry.getSpell(JMagicJSpells.SUN_GOD_AIR_RUN)
     )));
 
     @Override

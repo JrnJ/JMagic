@@ -1,6 +1,8 @@
-package com.jeroenj.jspells;
+package com.jeroenj.jspells.SunGod;
 
 import com.jeroenj.JMagic;
+import com.jeroenj.jspells.JMagicJSpells;
+import com.jeroenj.jspells.JSpell;
 import net.minecraft.entity.attribute.EntityAttributeInstance;
 import net.minecraft.entity.attribute.EntityAttributes;
 import net.minecraft.entity.effect.StatusEffectInstance;

@@ -6,12 +6,10 @@ import net.minecraft.entity.Entity;
 import net.minecraft.server.network.ServerPlayerEntity;
 import net.minecraft.server.world.ServerWorld;
 import net.minecraft.util.Identifier;
-import net.minecraft.world.World;
 
 import java.util.Arrays;
 import java.util.HashMap;
 import java.util.List;
-import java.util.Set;
 
 public class JSpellManager {
     public static final int SPELL_COUNT = 8;
@@ -36,16 +34,16 @@ public class JSpellManager {
         this.spells.set(index, JSpellRegistry.getSpell(identifier));
     }
 
-    public void tick(Entity user) {
-        int currentMana = user.getAttachedOrCreate(JMagicAttachmentTypes.PLAYER_MANA).getCurrentMana();
+    public void tick(ServerPlayerEntity caster) {
+        int currentMana = caster.getAttachedOrCreate(JMagicAttachmentTypes.PLAYER_MANA).getCurrentMana();
         if (currentMana < 100) {
             currentMana = Math.clamp(currentMana + 1, 0, 100);
-            user.setAttached(JMagicAttachmentTypes.PLAYER_MANA, new JMagicManaAttachment(currentMana));
+            caster.setAttached(JMagicAttachmentTypes.PLAYER_MANA, new JMagicManaAttachment(currentMana));
         }
 
         for (JSpell spell : spells) {
             if (spell == null) continue;
-            spell.tick();
+            spell.serverTick(caster);
         }
     }
 
