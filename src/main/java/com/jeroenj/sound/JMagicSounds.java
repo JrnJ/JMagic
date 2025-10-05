@@ -8,6 +8,7 @@ import net.minecraft.util.Identifier;
 
 public class JMagicSounds {
     public static final SoundEvent CARTOON_BOING = registerSoundEvent(JMagic.id("cartoon_boing"));
+    public static final SoundEvent CARTOON_AIR_RUN = registerSoundEvent(JMagic.id("cartoon_air_run"));
     public static final SoundEvent GROUND_IMPACT = registerSoundEvent(JMagic.id("ground_impact"));
 
     // Evori

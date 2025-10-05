@@ -32,7 +32,7 @@ public class BouncePassive extends JMagicPassive {
             if (playSound) {
                 JHelper.playServerSound(
                         player, JMagicSounds.CARTOON_BOING, SoundCategory.PLAYERS,
-                        0.5f, 0.9f + (player.getServerWorld().getRandom().nextFloat() * 0.1f));
+                        1.0f, 0.9f + (player.getServerWorld().getRandom().nextFloat() * 0.1f));
             }
         }
     }

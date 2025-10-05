@@ -5,6 +5,12 @@
             "jmagic:cartoon_boing"
         ]
     },
+    "cartoon_air_run": {
+        "subtitle": "sound.jmagic.cartoon_air_run",
+        "sounds": [
+            "jmagic:cartoon_air_run"
+        ]
+    },
     "ground_impact": {
         "subtitle": "sound.jmagic.ground_impact",
         "sounds": [

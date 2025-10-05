@@ -19,7 +19,7 @@ import net.minecraft.util.math.Vec3d;
 import net.minecraft.world.RaycastContext;
 import net.minecraft.world.World;
 
-@Environment(EnvType.SERVER)
+//@Environment(EnvType.SERVER)
 public final class JHelper {
 
     // Player

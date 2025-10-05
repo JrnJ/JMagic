@@ -60,6 +60,7 @@ public class JMagicEnUsLangProvider extends JMagicLanguageProvider {
 
         // Sounds
         translationBuilder.add(Sound("cartoon_boing"), "Cartoon Boing");
+        translationBuilder.add(Sound("cartoon_air_run"), "Cartoon Air Run");
 
         translationBuilder.add(Sound("evori_inspect"), "Evori Inspect");
         translationBuilder.add(Sound("evori_reload"), "Evori Reload");

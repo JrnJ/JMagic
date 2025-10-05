@@ -3,15 +3,19 @@ package com.jeroenj.jspells.SunGod;
 import com.jeroenj.JMagic;
 import com.jeroenj.jspells.JMagicJSpells;
 import com.jeroenj.jspells.JSpell;
+import com.jeroenj.sound.JMagicSounds;
 import com.jeroenj.util.JHelper;
+import net.minecraft.particle.ParticleTypes;
 import net.minecraft.server.network.ServerPlayerEntity;
 import net.minecraft.server.world.ServerWorld;
+import net.minecraft.sound.SoundCategory;
 import net.minecraft.util.math.MathHelper;
 import net.minecraft.util.math.Vec3d;
 
 // TODO: toggle this on double jump
 public class SunGodAirRun extends JSpell {
     public boolean active = false;
+    private int tickCounter = 0;
 
     public SunGodAirRun() {
         super(JMagicJSpells.SUN_GOD_AIR_RUN, "Air Run", "Air Run", 1, 2, JMagic.id("hud/icon/sun_god_air_run"));
@@ -29,6 +33,10 @@ public class SunGodAirRun extends JSpell {
 
     private void enable(ServerPlayerEntity caster) {
         caster.setNoGravity(true);
+        tickCounter = 0;
+//        JHelper.playServerSound(
+//                caster, JMagicSounds.CARTOON_AIR_RUN, SoundCategory.PLAYERS,
+//                1.0f, 1.0f);
     }
 
     private void disable(ServerPlayerEntity caster) {
@@ -49,6 +57,17 @@ public class SunGodAirRun extends JSpell {
         double maxClimbingVelocity = 0.5;
         if (Math.abs(result.getY()) > maxClimbingVelocity) {
             result = new Vec3d(result.getX(), MathHelper.clamp(result.getY(), -maxClimbingVelocity, maxClimbingVelocity), result.getZ());
+        }
+
+        JHelper.spawnServerParticle(caster.getServerWorld(), ParticleTypes.CLOUD, caster.getPos(), 3, 0.0, 0.0, 0.0, 0.0);
+
+        if (tickCounter == 30) {
+//            JHelper.playServerSound(
+//                    caster, JMagicSounds.CARTOON_AIR_RUN, SoundCategory.PLAYERS,
+//                    1.0f, 1.0f);
+            tickCounter = 0;
+        } else {
+            tickCounter++;
         }
 
         caster.setVelocity(result);
